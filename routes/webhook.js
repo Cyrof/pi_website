@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+    req.setTimeout(500000);
     const data = req.body;
     console.log(data.command);
     res.redirect('/');
