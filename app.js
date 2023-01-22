@@ -32,7 +32,8 @@ app.use(express.static(__dirname + '/public/stylesheets'));
 app.use('/', home);
 app.use('/webhook', webhook);
 
-app.listen(port, () => {
+let server = app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
     console.log('Press Ctrl+C to stop server');
 });
+server.setTimeout(500000);

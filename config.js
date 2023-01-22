@@ -1,5 +1,5 @@
 // config for the application 
 
-const port = 3000;
+const port = 8080;
 
 module.exports.port = port;
