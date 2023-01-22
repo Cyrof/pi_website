@@ -18,6 +18,7 @@ const port = process.env.PORT || config.port;
 // set up routes
 const home = require('./routes/home');
 const webhook = require('./routes/webhook');
+const login = require('./routes/login');
 
 // set body parser
 const bodyParser = require('body-parser');
@@ -29,7 +30,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public/stylesheets'));
 
 // set url routing 
-app.use('/', home);
+app.use('/', login);
+app.use('/home', home);
 app.use('/webhook', webhook);
 
 let server = app.listen(port, () => {
