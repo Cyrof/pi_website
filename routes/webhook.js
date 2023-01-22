@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const wol = require('../scripts/wol');
 
 router.get('/', (req, res) => {
     req.setTimeout(500000);
@@ -14,7 +15,8 @@ router.post('/', (req, res) => {
     const data = req.body;
     console.log(data);
     if (data.command == "turn on pc"){
-        require('../scripts/wol');
+        console.log('hi')
+        wol.start();
     }
     res.redirect('/');
 });
