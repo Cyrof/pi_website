@@ -19,6 +19,7 @@ const port = process.env.PORT || config.port;
 const home = require('./routes/home');
 const webhook = require('./routes/webhook');
 const login = require('./routes/login');
+const sys_info = require('./routes/system_information');
 
 // set body parser
 const bodyParser = require('body-parser');
@@ -33,6 +34,7 @@ app.use(express.static(__dirname + '/public/stylesheets'));
 app.use('/', login);
 app.use('/home', home);
 app.use('/webhook', webhook);
+app.use('/sys-info', sys_info);
 
 let server = app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
