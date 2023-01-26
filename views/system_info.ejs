@@ -10,7 +10,7 @@
     <h1>Page for system info</h1>    
     <% if (sys_info) { %>
         <h3>System information:</h3>
-        <p><%= sys_info %></p>
+        <p><%- JSON.stringify(sys_info) %></p>
     <% } %> 
 </body>
 </html>
