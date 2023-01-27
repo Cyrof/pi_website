@@ -20,6 +20,7 @@ const home = require('./routes/home');
 const webhook = require('./routes/webhook');
 const login = require('./routes/login');
 const sys_info = require('./routes/system_information');
+const sign_up = require('./routes/sign_up');
 
 // set body parser
 const bodyParser = require('body-parser');
@@ -36,6 +37,7 @@ app.use('/', login);
 app.use('/home', home);
 app.use('/webhook', webhook);
 app.use('/sys-info', sys_info);
+app.use('/sign-up', sign_up);
 
 let server = app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
