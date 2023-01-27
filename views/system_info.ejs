@@ -1,16 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="refresh" content="2;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sys_info.css">
+    <script src="sys_info.js"></script>
     <title>System infomation</title>
 </head>
+
 <body>
-    <h1>Page for system info</h1>    
-    <% if (sys_info) { %>
-        <h3>System information:</h3>
-        <p><%- JSON.stringify(sys_info) %></p>
-    <% } %> 
+    <div class="content">
+        <h1>Page for system info</h1>
+        <% if (sys_info) { %>
+            <table class="sys-info-table">
+                <tr id="table-header">
+                    <th scope="col">System Information:</th>
+                    <th></th>
+                    <th id="header-date" colspan="2" scope="col">
+                        <script>
+                            setDate();
+                        </script>
+                    </th>
+                </tr>
+                <tr>
+                    <td>Cpu Cores:</td>
+                    <td>
+                        <%= sys_info.cpu_data.core %>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Cpu usage:</td>
+                    <td id="cpu-percentage">
+                        <%= sys_info.cpu_data.percentage %>%
+
+                    </td>
+                    <td>
+                        <div class="parent-bar">
+                            <div class="cpu-bar child-bar">
+                                <script>
+                                    var cpu_percent = '<%= sys_info.cpu_data.percentage %>';
+                                    updatechild(cpu_percent, 'cpu');
+                                </script>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Load time 5min: </td>
+                    <td>
+                        <%=sys_info.cpu_data.load[0]%>%
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Load time 10min: </td>
+                    <td>
+                        <%= sys_info.cpu_data.load[1]%>%
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Load time 15min:</td>
+                    <td>
+                        <%= sys_info.cpu_data.load[2]%>%
+                    </td>
+                    <td></td>
+                </tr>
+                <tr id="ram-border">
+                    <td>Ram Usage:</td>
+                    <td>
+                        <%= sys_info.mem_data.used%> GiB/ <%= sys_info.mem_data.total%> GiB - <%=
+                                    sys_info.mem_data.percentage%>%
+                    </td>
+                    <td>
+                        <div class="parent-bar">
+                            <div class="mem-bar child-bar">
+                                <script>
+                                    var mem_percent = '<%= sys_info.mem_data.percentage %>';
+                                    updatechild(mem_percent, 'mem');
+                                </script>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>File System:</td>
+                    <td> / <%= sys_info.drive_data.used%> GiB/<%= sys_info.drive_data.total%> GiB - <%=
+                                    sys_info.drive_data.percentage %>%
+                    </td>
+                    <td>
+                        <div class="parent-bar">
+                            <div class="drive-bar child-bar">
+                                <script>
+                                    var drive_percent = '<%= sys_info.drive_data.percentage %>';
+                                    updatechild(drive_percent, 'drive');
+                                </script>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+    </div>
 </body>
+
 </html>

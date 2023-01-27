@@ -11,7 +11,7 @@ cpuInfo = async () => {
     var cpuPercentage = await cpu.usage();
     let loadAvg = ''
     cpu.loadavg().forEach((i) => (loadAvg += `${i}%`));
-    return {core: coreCount, percentage: cpuPercentage, load: loadAvg.trim()};
+    return {core: coreCount, percentage: cpuPercentage, load: loadAvg.trim().split('%')};
 
 }
 async function systemInfo(){
@@ -19,7 +19,7 @@ async function systemInfo(){
     let mem_info = await mem.info();
     let drive_info = await drive.info();
     let netstat_info = await netstat.inOut();
-    return {cpu_data : cpu_info, mem_data : {used: mem_info.usedMemMb, total: mem_info.totalMemMb, percentage: mem_info.usedMemPercentage}, 
+    return {cpu_data : cpu_info, mem_data : {used: (mem_info.usedMemMb/1000).toFixed(2), total: (mem_info.totalMemMb/1000).toFixed(2), percentage: mem_info.usedMemPercentage}, 
     drive_data : {used: drive_info.usedGb, total: drive_info.totalGb, percentage: drive_info.usedPercentage}, netstat_data : netstat_info}
 
 }

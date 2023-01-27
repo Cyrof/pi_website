@@ -1,0 +1,38 @@
+/* stylesheet for system information page */
+
+/* set content to center of page */
+body{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+/* set percentage bar */
+.parent-bar{
+    border: 0.5px solid black;
+    width: 100%;
+    height: 1vh;
+}
+
+.child-bar{
+    background-color: black;
+    /* width: 10%; */
+    padding: 0.5vh;
+    max-height: 1vh;
+}
+
+/* set table border */
+.sys-info-table{
+    border-collapse: collapse;
+}
+
+#table-header{
+    border-bottom: 1px solid black;
+}
+
+#ram-border{
+    border-bottom: 1px solid black;
+}
