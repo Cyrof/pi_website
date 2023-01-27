@@ -32,6 +32,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public/stylesheets'));
 app.use(express.static(__dirname + '/public/static'));
 
+// import dotenv to setup database
+require('dotenv').config();
+const db = require('./db/database');
+const mongoString = process.env.DATABASE_URL;
+db(mongoString);
+
 // set url routing 
 app.use('/', login);
 app.use('/home', home);
