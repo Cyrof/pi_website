@@ -1,12 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="sign_up.css">
     <title>Sign up</title>
 </head>
+
 <body>
-    <h1>sign up page</h1>
+    <div class="wrapper">
+        <div class="container">
+            <form action="/sign-up" class="signup-form" method="post">
+                <div class="grid-item">
+                    <div class="logo">
+                        <p>Sign Up</p>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="input fname">
+                        <input type="text" placeholder="First Name" name="fname" class="input-i" required>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="input lname">
+                        <input type="text" placeholder="Last Name" name="lname" class="input-i" required>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="input email">
+                        <input type="email" placeholder="example@email.com" name="email" class="input-i" required>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="input uname">
+                        <input type="text" placeholder="Username" name="uname" class="input-i" required>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="input pwd">
+                        <input type="password" placeholder="Password" name="pwd" id="pwd" class="input-i" required>
+                        <i class="bi bi-eye-slash icon" id="togglePassword"></i>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <p id="member">Already have an account? <a href="/" id="login-link">Log In</a></p>
+                </div>
+                <div class="grid-item">
+                    <div class="signup_btn">
+                        <input type="submit" value="Sign Up">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('pwd');
+        togglePassword.addEventListener('click', ()=>{
+            // toggle type attr
+            const type = password.getAttribute('type') === "password" ? "text" : "password";
+            password.setAttribute('type', type);
+            // toggle icon
+            togglePassword.classList.toggle("bi-eye");
+        })
+    </script>
 </body>
+
 </html>
