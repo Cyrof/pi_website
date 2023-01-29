@@ -6,19 +6,29 @@ const User = require('../models/database_model');
 const bcrypt = require('bcrypt');
 
 router.get('/', (req, res) => {
-    res.render('../views/sign_up');
+    res.render('../views/sign_up', {confirm : false, error: ""});
 });
 
 router.post('/', async (req, res) => {
-    res.render('../views/sign_up');
     const body = req.body;
-    body.access = "denied";
-    // create mongoose instance for new user
-    const user = new User(body);
-    // gen salt than hash password
-    const salt = await bcrypt.genSalt(10);
-    user.pwd = await bcrypt.hash(user.pwd, salt);
-    user.save();
+    let checkEmail = await User.find({email:body.email})
+    let checkuname = await User.find({uname:body.uname})
+    if (!checkEmail.length && !checkuname.length) {
+        res.render('../views/sign_up', {confirm : true, error: ""});
+        body.access = "denied";
+        // create mongoose instance for new user
+        const user = new User(body);
+        // gen salt than hash password
+        const salt = await bcrypt.genSalt(10);
+        user.pwd = await bcrypt.hash(user.pwd, salt);
+        user.save();
+    } else if(checkEmail.length){
+        console.log('hi')
+        res.render('../views/sign_up', {confirm : false, error: "email"})
+    } else if(checkuname.length){
+        res.render('../views/sign_up', {confirm:false, error: 'uname'});
+    }
+    
 });
 
 module.exports = router;

@@ -17,6 +17,34 @@
     <div class="wrapper">
         <div class="container">
             <form action="/sign-up" class="signup-form" method="post">
+                <div class="grid-item confirm">
+                    <% if (confirm) { %> 
+                        <p id="countdown"></p>
+                        <script>
+                            let timeLeft = 3
+                            let countdown = setInterval(function (){
+                                if(timeLeft <= 0){
+                                    clearInterval(countdown);
+                                    window.location.href = '/';
+                                } else {
+                                    document.getElementById('countdown').innerHTML = `Wait for admin approval. Redirecting in ${timeLeft}...`;
+                                }
+                                timeLeft -= 1;
+                            }, 1000);
+                        </script>
+                    <% } else if (error === 'email'){%> 
+                        <p id="error"></p>
+                        <script>
+                            document.getElementById('error').innerHTML = "Email already exists.";
+                        </script>
+
+                    <% } else if (error === 'uname') {%>
+                        <p id="error"></p>
+                        <script>
+                            document.getElementById('error').innerHTML = "Username already exists.";
+                        </script>
+                    <% } %>  
+                </div>
                 <div class="grid-item">
                     <div class="logo">
                         <p>Sign Up</p>

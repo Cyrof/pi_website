@@ -13,7 +13,7 @@ body{
 
 /* container style */
 .container{
-    height: 45%;
+    height: 50%;
     width: 20%;
     box-shadow: 1px 1px 1px 1px #d1cfcf;
     border-radius: 20px;
@@ -98,4 +98,13 @@ body{
 
 .signup_btn>input:hover{
     background-color: lightgrey;
+}
+
+/* confirmation text style */
+#countdown{
+    color: lightgreen;
+}
+
+#error{
+    color: red;
 }
