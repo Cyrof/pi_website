@@ -1,0 +1,151 @@
+/* stylesheet to style login page */
+body {
+    margin: 0;
+}
+
+/* wrapper style */
+.wrapper {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* container style */
+.container{
+    height: 40%;
+    width: 20%;
+    box-shadow: 1px 1px 1px 1px #d1cfcf;
+    border-radius: 20px;
+}
+
+/* login form style */
+.login-form {
+    display: grid;
+    grid-template-columns: repeat(1, fr);
+}
+
+/* grid item style */
+.grid-item {
+    width: 100%;
+    text-align: center;
+}
+
+/* logo style */
+.logo-name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.logo-name>p {
+    margin: 2vh 0 1vh 0;
+}
+
+/* login text style */
+.login-text {
+    font: 1em;
+    color: #878787;
+}
+
+/* email username input style */
+.input-email-uname {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.5em;
+    justify-content: space-evenly;
+}
+
+.input-email-uname>input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #bab8b8;
+}
+
+.input-email-uname>input:focus{
+    outline: none;
+}
+
+/* pws input style */
+.input-pwd{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0 10px 0;
+    justify-content: space-evenly;
+}
+
+.input-pwd>i{
+    margin-left: -0.3em;
+}
+
+.pwd-inputs>input{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #bab8b8;
+}
+
+.pwd-inputs>input:focus{
+    outline: none;
+}
+
+.pwd-inputs>i{
+    position: absolute;
+}
+
+.icon{
+    cursor: pointer;
+    margin-left: -1em;
+    text-align: center;
+}
+
+/* forget password style */
+.fgt-pwd{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.5em;
+    width: 85%;
+}
+
+#fgt-ps{
+    margin-left: auto;
+    text-decoration: none;
+    font-size: 11px;
+}
+
+/* submit btn style */
+.login-btn{
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+}
+
+.login-btn>input{
+    margin-left: auto;
+    border-radius: 5px;
+    border: 1px solid #c2c2c2;
+    margin-bottom: 1.2em;
+    background-color: white;
+}
+
+.login-btn>input:hover{
+    background-color: lightgrey;
+}
+
+/* sign up text style */
+#sign-up-text{
+    color: #878787;
+}
+
+#sign-up-link{
+    text-decoration: none;
+    color: #878787;
+}
+
+#sign-up-link:hover{
+    color: #454545;
+}
+
+/* error msg style */
+#error-msg{
+    color: red;
+}

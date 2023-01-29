@@ -2,9 +2,10 @@
 
 const express = require('express');
 const router = express.Router();
+const checker = require('../scripts/sess_checker')
 
 
-router.get('/', async (req, res) => {
+router.get('/', checker, async (req, res) => {
     // res.render('../views/login', {valid: false, error: ""});
     let data = require('../scripts/system_info');
     // data = await data.systemInfo();

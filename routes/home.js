@@ -2,8 +2,10 @@
 
 const express = require('express');
 const router = express.Router();
+const checker = require('../scripts/sess_checker');
 
-router.get('/', (req, res) => {
+router.get('/', checker,(req, res) => {
+    console.log(req.session.id);
     res.render('../views/home');
 });
 

@@ -4,6 +4,10 @@
 
 // define modules
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo');
 
 
 // create app variable
@@ -21,6 +25,7 @@ const webhook = require('./routes/webhook');
 const login = require('./routes/login');
 const sys_info = require('./routes/system_information');
 const sign_up = require('./routes/sign_up');
+const logout = require('./routes/logout');
 
 // set body parser
 const bodyParser = require('body-parser');
@@ -31,6 +36,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public/stylesheets'));
 app.use(express.static(__dirname + '/public/static'));
+app.use(cookieParser());
 
 // import dotenv to setup database
 require('dotenv').config();
@@ -38,12 +44,32 @@ const db = require('./db/database');
 const mongoString = process.env.DATABASE_URL;
 db(mongoString);
 
+// config session
+const TWO_HOURS = 1000 * 60 * 60 * 2;
+app.use(session({
+    secret: process.env.SECRET_KEY,
+    saveUninitialized: false,
+    name: 'session',
+    cookie: {
+        maxAge: TWO_HOURS
+    },
+    resave: false,
+    store: MongoStore.create({
+        client: mongoose.connection.getClient(),
+        dbName: 'Home-server',
+        collectionName: 'sessions',
+        ttl: TWO_HOURS,
+        autoRemove: 'native'
+    })
+}));
+
 // set url routing 
 app.use('/', login);
 app.use('/home', home);
 app.use('/webhook', webhook);
 app.use('/sys-info', sys_info);
 app.use('/sign-up', sign_up);
+app.use('/logout', logout);
 
 let server = app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
