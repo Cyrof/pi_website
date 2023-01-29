@@ -11,7 +11,6 @@ router.get('/', checker, async (req, res) => {
     // data = await data.systemInfo();
     // console.log(data);
     data.systemInfo().then(d => {
-        console.log(d)
         res.render('../views/system_info', {sys_info: d});
     });
     // res.render('../views/system_info', {sys_info: data});
