@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
     if (data.command === "turn on pc"){
         wol.start();
     } else if (data.repository.name === "pi_website"){
-        git_pull.pull;
+        git_pull.pull();
     }
     res.redirect('/');
 });
