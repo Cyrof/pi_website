@@ -2,7 +2,7 @@
 
 const { exec } = require('child_process');
 
-const pull = function () {
+pull = function () {
 
     exec('git pull --ff-only', (err, stdout, stderr) => {
         if (err) {
@@ -17,4 +17,4 @@ const pull = function () {
     });
 }
 
-module.exports = pull;
+module.exports.pull = pull;
