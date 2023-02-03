@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
     console.log('session destroyed');
     req.session.destroy();
-    res.clearCookie('connect.sid')
+    res.clearCookie('session')
     res.redirect('/');
 });
 
