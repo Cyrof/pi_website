@@ -14,6 +14,7 @@ router.post('/', (req, res) => {
     req.setTimeout(500000);
     const data = req.body;
     console.log(data);
+    console.log('hi')
     if (data.command === "turn on pc"){
         wol.start();
     } else if (data.repository.name === "pi_website"){
