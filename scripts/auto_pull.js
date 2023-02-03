@@ -1,8 +1,8 @@
 // script to auto pull changes from github using webhook
 
-const spawn = require('child_process');
+const { exec } = require('child_process');
 
-const pull = spawn('git pull origin master', (err, stdout, stderr) => {
+const pull = exec('git pull --ff-only', (err, stdout, stderr) => {
     if (err) {
         console.error(`error: ${err.message}`);
         return;
