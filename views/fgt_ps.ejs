@@ -4,9 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="fgt-ps.css">
     <title>Forget password</title>
 </head>
 <body>
-    <h1>forget password page</h1>
+    <div class="wrapper">
+        <div class="container">
+            <form action="/reset-ps-link" method="post" class="rpl">
+                <div class="grid-item">
+                    <div class="msg">
+                        <% if (type && msg) {%> 
+                            <p>hi</p>
+                        <% } %> 
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="logo">
+                        <h3>Forgot your password</h3>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="text">
+                        <p>Please enter the email address you'd like your password reset information sent to.</p>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="input-email">
+                        <i class="bi bi-envelope"></i>
+                        <input type="text" placeholder="Example@email.com" name="email" required>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="back-home">
+                        <a href="/" id="bck-hm">Back To Login</a>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="reset-btn">
+                        <input type="submit" value="Request reset link">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

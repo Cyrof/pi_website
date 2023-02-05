@@ -23,6 +23,10 @@ const dataschema = new mongoose.Schema({
         required: true,
         type: String
     },
+    token: {
+        required: true,
+        type: String
+    },
     access: {
         required: true,
         type: String

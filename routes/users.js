@@ -5,6 +5,9 @@ const router = express.Router();
 const User = require('../models/database_model');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+const nodeMailer = require('nodemailer');
+const randtoken = require('rand-token');
+const mongoose = require('mongoose');
 
 
 // login route
@@ -30,7 +33,7 @@ router.post('/', async (req, res) => {
         const validps = await bcrypt.compare(body.pwd, user.pwd);
         const access = user.access
         if (validps && access === 'approved') {
-            sess.userid = user.uname;
+            sess.token = user.token;
             sess.save();
             console.log(sess)
             res.render('../views/login', { valid: true });
@@ -46,15 +49,17 @@ router.post('/', async (req, res) => {
 
 // signup route
 router.get('/sign-up', (req, res) => {
-    res.render('../views/sign_up', {confirm: false, error: ""});
+    res.render('../views/sign_up', { confirm: false, error: "" });
 });
 
 router.post('/sign-up', async (req, res) => {
     const body = req.body;
-    let checkEmail = await User.find({email:body.email})
-    let checkuname = await User.find({uname:body.uname})
+    let checkEmail = await User.find({ email: body.email })
+    let checkuname = await User.find({ uname: body.uname })
     if (!checkEmail.length && !checkuname.length) {
-        res.render('../views/sign_up', {confirm : true, error: ""});
+        res.render('../views/sign_up', { confirm: true, error: "" });
+        let token = randtoken.generate(20);
+        body.token = token;
         body.access = "denied";
         // create mongoose instance for new user
         const user = new User(body);
@@ -62,13 +67,13 @@ router.post('/sign-up', async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         user.pwd = await bcrypt.hash(user.pwd, salt);
         user.save();
-    } else if(checkEmail.length){
+    } else if (checkEmail.length) {
         console.log('hi')
-        res.render('../views/sign_up', {confirm : false, error: "email"})
-    } else if(checkuname.length){
-        res.render('../views/sign_up', {confirm:false, error: 'uname'});
+        res.render('../views/sign_up', { confirm: false, error: "email" })
+    } else if (checkuname.length) {
+        res.render('../views/sign_up', { confirm: false, error: 'uname' });
     }
-    
+
 });
 
 // logout route
@@ -79,9 +84,78 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
+// function to send email to user
+function sendEmail(email, token) {
+    let Email = email;
+    let Token = token;
+
+    let mail = nodeMailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'hs.auto.noreply@gmail.com',
+            pass: 'hvloxoqohcyktdao'
+        }
+    });
+
+    let mailOptions = {
+        from: 'hs.auto.noreply@gmail.com',
+        to: Email,
+        subject: 'Reset Password link',
+        html: '<h1>You requested to reset your password, kindly use this <a href="http://localhost:8080/reset-password?token='+Token+'">link</a> to reset your password</h1>'
+    };
+
+    mail.sendMail(mailOptions, function (error, info){
+        if (error) {
+            console.log(1);
+        } else {
+            console.log(0);
+        }
+    });
+}
+
 // forget password route
 router.get('/forgot-password', (req, res) => {
-    res.render('../views/fgt_ps');
-})
+    res.render('../views/fgt_ps', {type: '', msg: ''});
+});
+
+router.post('/reset-ps-link', async (req, res) => {
+    let email = req.body.email;
+    let user = await User.find({email: email});
+    let db = mongoose.connection.collection('users');
+    user = user[0];
+    let type = '';
+    let msg = '';
+
+    if (user && !user.length){
+        let token = randtoken.generate(20);
+        let send = sendEmail(email, token);
+        if (send != '0'){
+            let data = { $set: {token: token}}
+            console.log(token)
+            db.updateOne({email: email}, data, function (err, res){
+                if (err) throw err;
+            })
+            type = 'success'
+            msg = 'Reset email link sent successfully';
+        } else {
+            type = 'error';
+            msg = 'An error has occurred';
+        }
+    } else {
+        type = "error";
+        msg = "The email is not registered with us."
+    }
+
+    req.flash(type, msg);
+    res.redirect('/forgot-password');
+});
+
+// reset password link route
+router.get('/reset-password', (req, res) =>{
+    console.log(req.query.token);
+    res.render('../views/reset-password', {token: req.query.token});
+    // res.render('../views/reset-password');
+});
+
 
 module.exports = router;

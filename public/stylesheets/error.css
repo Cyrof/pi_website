@@ -1,0 +1,22 @@
+/* error stylesheet */
+body{
+    margin: 0;
+}
+
+/* wrapper style */
+.wrapper {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    height: 40%;
+    width: 60%;
+}
+
+.container>p>a{
+    text-decoration: none;
+}

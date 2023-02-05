@@ -1,0 +1,97 @@
+body{
+    margin: 0;
+}
+
+/* wrapper style */
+.wrapper {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* container style */
+.container {
+    height: 40%;
+    width: 20%;
+    box-shadow: 1px 1px 1px 1px #d1cfcf;
+    border-radius: 20px;
+}
+
+/* form style */
+.reset-form {
+    display: grid;
+    grid-template-columns: repeat(1, fr);
+}
+
+/* grid item style */
+.grid-item {
+    width: 100%;
+    text-align: center;
+}
+
+.logo {
+    font-weight: bold;
+}
+
+.logo>p{
+    margin: 2vh 0 1vh 0;
+}
+
+/* text style */
+.text {
+    font: 1em;
+    color: #878787;
+}
+
+/* input ps style */
+.input-ps {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0 10px 0;
+    justify-content: space-evenly;
+}
+
+.input-ps>i{
+    margin-left: -0.3em;
+}
+
+.ps-input>input{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #bab8b8;
+}
+
+.ps-input>input:focus{
+    outline: none;
+}
+
+.ps-input>i{
+    position: absolute;
+}
+
+.icon{
+    cursor: pointer;
+    margin-left: -1em;
+    text-align: center;
+}
+
+/* reset btn style */
+.update-btn{
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+}
+
+.update-btn>input{
+    margin-left: auto;
+    border-radius: 5px;
+    border: 1px solid #c2c2c2;
+    margin-bottom: 1.2em;
+    background-color: white;
+}
+
+.update-btn>input:hover{
+    background-color: lightgrey;
+}

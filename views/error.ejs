@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="error.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+</head>
+<body>
+    <% if (error) {%> 
+        <div class="wrapper">
+            <div class="container">
+                <h1><%= error.status %> error</h1>
+                <h2>Sorry, this page isn't available.</h2>
+                <p>The link you have followed may be broken, or the page may have been removed. <a href="/">Click here to return.</a></p>
+            </div>
+        </div>
+    <% } %> 
+</body>
+</html>
