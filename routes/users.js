@@ -79,4 +79,9 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
+// forget password route
+router.get('/forgot-password', (req, res) => {
+    res.render('../views/fgt_ps');
+})
+
 module.exports = router;
