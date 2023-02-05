@@ -22,10 +22,8 @@ const port = process.env.PORT || config.port;
 // set up routes
 const home = require('./routes/home');
 const webhook = require('./routes/webhook');
-const login = require('./routes/login');
 const sys_info = require('./routes/system_information');
-const sign_up = require('./routes/sign_up');
-const logout = require('./routes/logout');
+const users = require('./routes/users');
 
 // set body parser
 const bodyParser = require('body-parser');
@@ -64,12 +62,10 @@ app.use(session({
 }));
 
 // set url routing 
-app.use('/', login);
+app.use('/', users);
 app.use('/home', home);
 app.use('/webhook', webhook);
 app.use('/sys-info', sys_info);
-app.use('/sign-up', sign_up);
-app.use('/logout', logout);
 
 let server = app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
