@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 let sessionChecker = (req, res, next) => {
-    if (req.session.userid){
+    if (req.session.token){
         console.log('User session found');
         next();
     } else {
