@@ -8,14 +8,22 @@
     <title>Error</title>
 </head>
 <body>
-    <% if (error) {%> 
+    <% if (tokenErrorBool){%> 
+        <div class="wrapper">
+            <div class="container">
+                <h1><%= tokenError %> </h1>
+                <h2>Sorry, this page isn't available.</h2>
+                <p>The link you have followed may be broken, or the page may have been removed. <a href="/">Click here to return.</a></p>
+            </div>
+        </div>
+    <% } else if (error){%> 
         <div class="wrapper">
             <div class="container">
                 <h1><%= error.status %> error</h1>
                 <h2>Sorry, this page isn't available.</h2>
                 <p>The link you have followed may be broken, or the page may have been removed. <a href="/">Click here to return.</a></p>
             </div>
-        </div>
-    <% } %> 
+        </div> 
+    <% } %>
 </body>
 </html>
