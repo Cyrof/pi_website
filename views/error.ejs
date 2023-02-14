@@ -8,7 +8,7 @@
     <title>Error</title>
 </head>
 <body>
-    <% if (tokenErrorBool){%> 
+    <% if (typeof tokenErrorBool != "undefined" ? tokenErrorBool: false){%> 
         <div class="wrapper">
             <div class="container">
                 <h1><%= tokenError %> </h1>
