@@ -9,7 +9,7 @@ const session = require('express-session');
 const createError = require('http-errors');
 const logger = require('morgan');
 const fs = require('fs');
-const flash = require('express-flash');
+// const flash = require('express-flash');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
 
@@ -36,7 +36,7 @@ const bodyParser = require('body-parser');
 app.set('view engine', 'ejs');
 app.use(logger('common', {stream: fs.createWriteStream('./website.log', {flags: 'a'})}));
 app.use(logger('dev'));
-app.use(flash());
+// app.use(flash());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public/stylesheets'));

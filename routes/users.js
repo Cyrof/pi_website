@@ -147,7 +147,7 @@ router.post('/reset-ps-link', async (req, res) => {
         msg = "The email is not registered with us."
     }
 
-    req.flash(type, msg);
+    // req.flash(type, msg);
     res.redirect('/forgot-password');
 });
 
