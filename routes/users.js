@@ -8,6 +8,7 @@ const session = require('express-session');
 const nodeMailer = require('nodemailer');
 const randtoken = require('rand-token');
 const mongoose = require('mongoose');
+const tokenCheck = require('../scripts/token_checker');
 
 
 // login route
@@ -151,7 +152,7 @@ router.post('/reset-ps-link', async (req, res) => {
 });
 
 // reset password link route
-router.get('/reset-password', (req, res) =>{
+router.get('/reset-password', tokenCheck, (req, res) =>{
     console.log(req.query.token);
     res.render('../views/reset-password', {token: req.query.token});
     // res.render('../views/reset-password');
