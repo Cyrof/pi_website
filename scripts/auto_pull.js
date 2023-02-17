@@ -5,7 +5,7 @@ const { exec } = require('child_process');
 pull = function () {
 
     // run auto pull from github
-    exec('git pull --ff-only', (err, stdout, stderr) => {
+    exec('git pull --ff-only origin master', (err, stdout, stderr) => {
         if (err) {
             console.error(`error: ${err.message}`);
             return;
