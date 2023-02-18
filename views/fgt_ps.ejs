@@ -17,8 +17,22 @@
             <form action="/reset-ps-link" method="post" class="rpl">
                 <div class="grid-item">
                     <div class="msg">
-                        <% if (type && msg) {%> 
-                            <p>hi</p>
+                        <% if (type && msg) {%>
+                            <% if (type == 'error') {%>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('.container').height($('.container').height() + 15);
+                                    })
+                                </script>
+                                <p style="color:red;"><%= msg %></p>
+                            <% } else if (type == 'success') {%>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('.container').height($('.container').height() + 15);
+                                    })
+                                </script>
+                                <p style="color:lime;"><%= msg %></p>
+                            <% } %>
                         <% } %> 
                     </div>
                 </div>
