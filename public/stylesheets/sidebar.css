@@ -194,4 +194,7 @@
     .top-container{
         width: calc(100vw - 10rem);
     }
+    .page-name{
+        font-size: 1em;
+    }
 }

@@ -11,6 +11,7 @@
             <i class="bi bi-list"></i>
         </a>
     </div>
+    
     <div class="sidebar">
         <div class="sidebar_inner">
             <div class="sidebar_item">
@@ -18,29 +19,30 @@
                     <span class="header-text">Dashboard</span>
                 </div>
             </div>
-            <div class="sidebar_item link">
+            <div class="sidebar_item link overview">
                 <a href="/home" class="page">
                     <span class="icon"><i class="bi bi-columns-gap"></i></span>
                     <span class="text">Overview</span>
                 </a>
             </div>
-            <div class="sidebar_item link">
+            <div class="sidebar_item link pwd-manager">
                 <a href="#" class="page">
                     <span class="icon"><i class="bi bi-lock-fill"></i></span>
                     <span class="text">Pwd Manager</span>
                 </a>
             </div>
-            <div class="sidebar_item link">
+            <div class="sidebar_item link  vpn">
                 <a href="#" class="page">
                     <span class="icon"><i class="bi bi-key-fill"></i></span>
                     <span class="text">Vpn</span>
                 </a>
             </div>
-            <div class="sidebar_item link"></div>
-            <a href="/sys-info" class="page">
-                <span class="icon"><i class="bi bi-laptop"></i></span>
-                <span class="text">System Info</span>
-            </a>
+            <div class="sidebar_item link sys">
+                <a href="/sys-info" class="page">
+                    <span class="icon"><i class="bi bi-laptop"></i></span>
+                    <span class="text">System Info</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -49,26 +51,32 @@
     <div class="top-nav-item">
         <div class="page-name">
             <% if (page) {%>
-                <span id="page-name"><%= page %></span>
-            <% } %>
+                <span id="page-name">
+                    <%= page %>
+                </span>
+                <% } %>
         </div>
     </div>
     <div class="top-nav-item">
         <div class="user-dropdown">
             <div class="user" onclick="displayDropdown()">
                 <% if (user) {%>
-                    <span><%= user %></span>
-                <% } %>
-                <div id="user-icon">
-                    <span><i class="bi bi-person-circle"></i></span>
-                    <i class="bi bi-caret-down-fill"></i>
-                </div>
+                    <span>
+                        <%= user %>
+                    </span>
+                    <% } %>
+                        <div id="user-icon">
+                            <span><i class="bi bi-person-circle"></i></span>
+                            <i class="bi bi-caret-down-fill"></i>
+                        </div>
             </div>
             <div class="dropdown-option">
                 <div class="dropdown-user">
                     <% if (user) {%>
-                        <span>Signed in as <span class="uname"><%= user %></span></span>
-                    <% } %>
+                        <span>Signed in as <span class="uname">
+                                <%= user %>
+                            </span></span>
+                        <% } %>
                 </div>
                 <a href="/logout" class="logout">Logout</a>
             </div>
@@ -76,10 +84,29 @@
     </div>
 </div>
 
+<% if (page) {%>
+    <script>
+        let page_name = '<%= page %>';
+        switch (page_name) {
+            case 'Overview':
+                $('.overview').css('background-color', '#65666b');
+                break;
+            case 'Pwd Manager':
+                $('.pwd-manager').css('background-color', '#65666b');
+                break;
+            case 'Vpn':
+                $('.vpn').css('background-color', '#65666b');
+                break;
+            case 'System Information':
+                $('.sys').css('background-color', '#65666b');
+        }
+    </script>
+<% } %>
+
 <script>
-    function displayDropdown(){
+    function displayDropdown() {
         const dropdown = $('.dropdown-option');
-        if (dropdown.css('display') === 'none'){
+        if (dropdown.css('display') === 'none') {
             dropdown.css('display', 'block');
         } else {
             dropdown.css('display', 'none');
