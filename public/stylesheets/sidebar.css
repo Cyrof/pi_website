@@ -1,9 +1,17 @@
-.sidebar {
+/* container style */
+.side-container {
     position: fixed;
     left: 0;
     width: 15rem;
     height: 100vh;
+    /* background: #363740; */
+    padding: 0;
+}
+
+.sidebar {
     background: #363740;
+    height: 100%;
+    display: block;
 }
 
 /* sidebar container style */
@@ -49,4 +57,141 @@
 /* icon style */
 .icon{
     margin-left: 1.5em;
+}
+
+/* hamburger menu style */
+.hamburger{
+    width: 100%;
+    text-align: center;
+    height: 4rem;
+    /* display: none; */
+    color: black;
+    background: #363740;
+    display: none;
+}
+
+.hamburger>a{
+    color: #65666b;
+}
+
+.bi-list {
+    font-size: 2.5em;
+}
+
+/* top nav bar */
+.top-container {
+    background: #363740;
+    height: 5rem;
+    width: calc(100vw - 15rem);
+    float: right;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-name {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0 0 0 2vh;
+}
+
+.bi-caret-down-fill{
+    font-size: 0.7em;
+}
+
+#user-icon {
+    display: flex;
+    gap: 0;
+    align-items: center;
+}
+
+.user {
+    font-size: 1.5em;
+    display: flex;
+    gap: 0.5em;
+    margin: 0 2vh 0 0;
+    /* position: relative; */
+}
+
+.user-dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.user:hover {
+    cursor: pointer;
+}
+
+.page-name>span{
+    color: #A4A6B3;
+}
+.user>span {
+    color: #A4A6B3;
+}
+#user-icon{
+    color: #A4A6B3;
+}
+
+/* drop down option style */
+.dropdown-option {
+    width: 12rem;
+    background-color: #44454d;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 1rem;
+    top: 3rem;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px grey;
+    align-items: center;
+    display: none;
+}
+
+.dropdown-user {
+    margin: 0.5em 0 0 0;
+    padding: 0 0 0.5em 0;
+    border-bottom: 1px solid grey;
+    width: 100%;
+    text-align: center;
+    color: #A4A6B3;
+}
+
+.uname{
+    font-weight: bold;
+}
+
+.logout {
+    width: 100%;
+    padding: 0.5em 0 0.5em 0;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #A4A6B3;
+    display: inline-block;
+}
+
+.logout:hover {
+    background-color: #65666b;
+    text-decoration: none;
+    color: #A4A6B3;
+}
+
+
+/* media for side bar  */
+@media only screen and (max-width: 600px) {
+    /* side container style phone */
+    .side-container{
+        width: 10rem;
+    }
+    .nav-text{
+        font-size: 1.5em;
+    }
+    .text{
+        font-size: 1em;
+    }
+    /* top nav bar style phone */
+    .top-container{
+        width: calc(100vw - 10rem);
+    }
 }

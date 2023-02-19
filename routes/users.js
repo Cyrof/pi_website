@@ -102,7 +102,10 @@ function sendEmail(email, token) {
         from: 'hs.auto.noreply@gmail.com',
         to: Email,
         subject: 'Reset Password link',
+        // for testing purposes
         // html: '<h1>You requested to reset your password, kindly use this <a href="http://localhost:8080/reset-password?token='+Token+'">link</a> to reset your password</h1>'
+
+        // for deployment
         html: '<h1>You requested to reset your password, kindly use this <a href="http://25e4-116-87-173-227.ap.ngrok.io/reset-password?token='+Token+'">link</a> to reset your password</h1>'
     };
 
