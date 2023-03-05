@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,15 +8,38 @@
     <link rel="stylesheet" href="sharedfolder.css">
     <title>SharedFolder</title>
 </head>
+
 <body style="background-color: #232327;">
     <!-- include nav bar -->
     <%- include('./partials/side_bar'); %>
-    <div class="wrapper">
-        <div class="container">
-            <a href="file:////home/cyrof/projects/pi_website/README.md">click me</a>
-            <object data="/home/cyrof/sharedStuff/folder for other stuff"></object>
+        <div class="wrapper">
+            <div class="container">
+                <table class="folder">
+                    <% if (content) {%>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Type</th>
+                            <th>Size</th>
+                            <th>Data Modified</th>
+                        </tr>
+                        <% for (const obj in content) {%>
+                            <tr class="file">
+                                <% for (const key in content[obj]) {%>
+                                    <td>
+                                        <% if (query) {%>
+                                            <a href="/sharedFolder?loc=<%= obj %>&dir=<%= query %>"><%= content[obj][key] %></a>
+                                        <% } else {%>
+                                            <a href="/sharedFolder?loc=<%= obj %>"><%= content[obj][key] %></a>
+                                        <% } %>
+                                    </td>
+                                <% } %>
+                            </tr>
+                        <% } %>
+                    <% } %>
+                </table>
+            </div>
         </div>
-    </div>
-    
+
 </body>
+
 </html>

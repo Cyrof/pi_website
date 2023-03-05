@@ -12,7 +12,7 @@ const fs = require('fs');
 // const flash = require('express-flash');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
-
+const serveIndex = require('serve-index');
 
 // create app variable
 const app = express();
@@ -74,7 +74,7 @@ app.use('/', users);
 app.use('/home', home);
 app.use('/webhook', webhook);
 app.use('/sys-info', sys_info);
-app.use('/sharedFolder', sharedFolder);
+app.use('/sharedFolder', serveIndex('/home/cyrof/sharedStuff'));
 
 // catch 404 error and forward to error handler
 app.use(function (req, res, next) {

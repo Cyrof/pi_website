@@ -51,11 +51,11 @@ table{
 }
 
 #table-header{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #F7F8FC;
 }
 
 #ram-border{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #F7F8FC;
 }
 
 /* phone  media*/

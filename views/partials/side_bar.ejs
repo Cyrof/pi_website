@@ -25,7 +25,7 @@
                     <span class="text">Overview</span>
                 </a>
             </div>
-            <div class="sidebar_item link SharedFolder">
+            <div class="sidebar_item link shared">
                 <a href="/sharedFolder" class="page">
                     <span class="icon"><i class="bi bi-folder-fill"></i></span>
                     <span class="text">Shared Folder</span>
@@ -93,6 +93,7 @@
 <% if (page) {%>
     <script>
         let page_name = '<%= page %>';
+        console.log(page_name)
         switch (page_name) {
             case 'Overview':
                 $('.overview').css('background-color', '#65666b');
@@ -105,8 +106,10 @@
                 break;
             case 'System Information':
                 $('.sys').css('background-color', '#65666b');
+                break;
             case 'Shared Folder':
-                $('.SharedFolder').css('background-color', '#65666b');
+                $('.shared').css('background-color', '#65666b');
+                break;
         }
     </script>
 <% } %>

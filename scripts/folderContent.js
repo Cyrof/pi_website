@@ -6,20 +6,22 @@ const mime = require('mime-types');
 
 // join path of the directory 
 // const directoryPath = path.join('/home/cyrof/', 'sharedStuff');
-const directoryPath = "/home/cyrof/sharedStuff"
+const directoryPath = process.env.SHARED_FOLDER_PATH
 
-let getContentDetails = () => {
+function getContentDetails(p=directoryPath){
     let details = {}
     // let newdetails = {}
-    files = fs.readdirSync(directoryPath)
+    let files = fs.readdirSync(p)
+    let objNum = 1
     files.forEach((element) => {
-        stats = fs.statSync(path.join(directoryPath, element));
+        stats = fs.statSync(path.join(p, element));
         let id = Buffer.from(element, 'utf-8').toString('hex');
         let type = mime.lookup(element) !== false ? mime.lookup(element) : 'directory';
         let size = stats.size;
         let modified = stats.mtime;
-        let f = {id:id, name: element, type: type, size: size, modified: modified};
-        details[element] = f;
+        let f = {name: element, type: type, size: size, modified: modified};
+        details[objNum] = f;
+        objNum += 1;
     });
     return details
 }
