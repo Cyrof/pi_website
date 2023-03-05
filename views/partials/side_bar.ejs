@@ -25,6 +25,12 @@
                     <span class="text">Overview</span>
                 </a>
             </div>
+            <div class="sidebar_item link SharedFolder">
+                <a href="/sharedFolder" class="page">
+                    <span class="icon"><i class="bi bi-folder-fill"></i></span>
+                    <span class="text">Shared Folder</span>
+                </a>
+            </div>
             <div class="sidebar_item link pwd-manager">
                 <a href="#" class="page">
                     <span class="icon"><i class="bi bi-lock-fill"></i></span>
@@ -99,6 +105,8 @@
                 break;
             case 'System Information':
                 $('.sys').css('background-color', '#65666b');
+            case 'Shared Folder':
+                $('.SharedFolder').css('background-color', '#65666b');
         }
     </script>
 <% } %>

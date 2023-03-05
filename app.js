@@ -28,6 +28,7 @@ const home = require('./routes/home');
 const webhook = require('./routes/webhook');
 const sys_info = require('./routes/system_information');
 const users = require('./routes/users');
+const sharedFolder = require('./routes/shared_folder');
 
 // set body parser
 const bodyParser = require('body-parser');
@@ -73,6 +74,7 @@ app.use('/', users);
 app.use('/home', home);
 app.use('/webhook', webhook);
 app.use('/sys-info', sys_info);
+app.use('/sharedFolder', sharedFolder);
 
 // catch 404 error and forward to error handler
 app.use(function (req, res, next) {
