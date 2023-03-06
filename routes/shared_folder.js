@@ -45,18 +45,21 @@ router.get('/', checker, async (req, res) => {
             data = require('../scripts/folderContent').getContentDetails();
             FileIndex = checkFile(req.query.path, data);
         }
-        console.log(data)
         
-        console.log(FileIndex);
         if (FileIndex && data[FileIndex]['type'] === 'directory') {
             if (req.query.dir){
                 path = req.query.dir + `/${req.query.path}`;
             } else {
                 path = process.env.SHARED_FOLDER_PATH + `/${data[FileIndex]['name']}`;
             }
+            try{
+                d = require('../scripts/folderContent').getContentDetails(p = path);
+                res.render('../views/sharedFolder', { page: 'Shared Folder', user: user.uname, content: d, dir: path });
+            }
+            catch (e){
+                res.send("An error occured" + e)
+            }
             
-            let d = require('../scripts/folderContent').getContentDetails(p = path);
-            res.render('../views/sharedFolder', { page: 'Shared Folder', user: user.uname, content: d, dir: path });
         } else {
             let p = process.env.SHARED_FOLDER_PATH + `/${data[FileIndex]['name']}`
             if (req.query.dir){
