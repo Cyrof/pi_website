@@ -21,18 +21,28 @@
                             <th>Type</th>
                             <th>Size</th>
                             <th>Data Modified</th>
+                            <th>Download</th>
                         </tr>
                         <% for (const obj in content) {%>
                             <tr class="file">
                                 <% for (const key in content[obj]) {%>
                                     <td>
-                                        <% if (query) {%>
-                                            <a href="/sharedFolder?loc=<%= obj %>&dir=<%= query %>"><%= content[obj][key] %></a>
+                                        <% if (dir) {%>
+                                            <a href="/sharedFolder?path=<%= content[obj]['name'] %>&dir=<%= dir %>"><%= content[obj][key] %></a>
                                         <% } else {%>
-                                            <a href="/sharedFolder?loc=<%= obj %>"><%= content[obj][key] %></a>
+                                            <a href="/sharedFolder?path=<%= content[obj]['name'] %>"><%= content[obj][key] %></a>
                                         <% } %>
                                     </td>
                                 <% } %>
+                                <td>
+                                    <div class="DbtnBox">
+                                        <% if (dir) {%>
+                                            <a href="/sharedFolder/download?path=<%= content[obj]['name'] %>&dir=<%= dir %>" class="Dbtn"><i class="bi bi-download"></i>Download</a>
+                                        <% } else {%>
+                                            <a href="/sharedFolder/download?path=<%= content[obj]['name'] %>" class="Dbtn"><i class="bi bi-download"></i>Download</a>
+                                        <% } %>
+                                    </div>
+                                </td>
                             </tr>
                         <% } %>
                     <% } %>

@@ -10,9 +10,29 @@
     align-items: center; */
 }
 
-
+/* folder style */
 .folder {
     color: #F7F8FC;
-    width: 100vw;
+    width: 100%;
+}
+
+/* download button style */
+.DbtnBox{
+    background-color: rgb(50, 105, 223);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.Dbtn {
+    color: #F7F8FC;
+}
+
+.DbtnBox:hover{
+    background-color: rgb(45, 97, 207);
+}
+
+.Dbtn:hover{
+    color: #dddddd;
+    text-decoration: none;
 }
 

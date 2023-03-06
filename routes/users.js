@@ -13,7 +13,13 @@ const tokenCheck = require('../scripts/token_checker');
 
 // login route
 let sess;
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+    if (req.session.token){
+        let user = await User.find({token:req.session.token});
+        if (user.length > 0){
+            res.redirect('/home')
+        }
+    }   
     res.render('../views/login', { valid: false, error: "" });
 })
 
