@@ -74,7 +74,7 @@ app.use('/', users);
 app.use('/home', home);
 app.use('/webhook', webhook);
 app.use('/sys-info', sys_info);
-app.use('/sharedFolder', serveIndex('/home/cyrof/sharedStuff'));
+app.use('/sharedFolder', sharedFolder);
 
 // catch 404 error and forward to error handler
 app.use(function (req, res, next) {
