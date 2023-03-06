@@ -26,8 +26,8 @@ function checkFile(fileName, data) {
 }
 
 // functoin to read file and return data
-function readFile(path){
-    data = fs.readFileSync(path, {encoding: 'utf8'})
+function readFile(path) {
+    data = fs.readFileSync(path, { encoding: 'utf8' })
     return data
 }
 
@@ -45,30 +45,31 @@ router.get('/', checker, async (req, res) => {
             data = require('../scripts/folderContent').getContentDetails();
             FileIndex = checkFile(req.query.path, data);
         }
-        
+
+
         if (FileIndex && data[FileIndex]['type'] === 'directory') {
-            if (req.query.dir){
+            if (req.query.dir) {
                 path = req.query.dir + `/${req.query.path}`;
             } else {
                 path = process.env.SHARED_FOLDER_PATH + `/${data[FileIndex]['name']}`;
             }
-            try{
+            try {
                 d = require('../scripts/folderContent').getContentDetails(p = path);
                 res.render('../views/sharedFolder', { page: 'Shared Folder', user: user.uname, content: d, dir: path });
             }
-            catch (e){
+            catch (e) {
                 res.send("An error occured" + e)
             }
-            
+
         } else {
             let p = process.env.SHARED_FOLDER_PATH + `/${data[FileIndex]['name']}`
-            if (req.query.dir){
+            if (req.query.dir) {
                 let path = req.query.dir + `/${req.query.path}`;
-                d = readFile(path=path);
+                d = readFile(path = path);
             } else {
-                d = readFile(path=p);
+                d = readFile(path = p);
             }
-            
+
             res.send(d);
         }
     } else {
@@ -80,7 +81,7 @@ router.get('/', checker, async (req, res) => {
 
 // download route
 router.get('/download', (req, res) => {
-    if (req.query.dir){
+    if (req.query.dir) {
         path = req.query.dir + `/${req.query.path}`;
         data = require('../scripts/folderContent').getContentDetails(req.query.dir)
     } else {
@@ -88,12 +89,12 @@ router.get('/download', (req, res) => {
         data = require('../scripts/folderContent').getContentDetails()
     }
     let i = checkFile(req.query.path, data);
-    if (i && data[i]['type'] === 'directory'){
+    if (i && data[i]['type'] === 'directory') {
         // zip folder and send path to zip folder
         data = require('../scripts/folderContent').getContentDetails(process.env.SHARED_FOLDER_PATH + `/${req.query.path}`)
         let array_data = []
-        for (key in data){
-            d = {path : path+`/${data[key]['name']}`, name: data[key]['name']}
+        for (key in data) {
+            d = { path: path + `/${data[key]['name']}`, name: data[key]['name'] }
             array_data.push(d);
         }
         console.log(array_data)
@@ -102,7 +103,7 @@ router.get('/download', (req, res) => {
         console.log(path);
         res.download(path);
     }
-    
+
     // res.redirect('/sharedFolder');
 })
 
