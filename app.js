@@ -13,6 +13,7 @@ const fs = require('fs');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
 const serveIndex = require('serve-index');
+const zip = require('express-easy-zip');
 
 // create app variable
 const app = express();
@@ -68,6 +69,9 @@ app.use(session({
         autoRemove: 'native'
     })
 }));
+
+// set zip to app
+app.use(zip());
 
 // set url routing 
 app.use('/', users);

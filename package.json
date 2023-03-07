@@ -1,7 +1,7 @@
 {
   "name": "pi_website",
   "version": "1.0.0",
-  "description": "",
+  "description": "test",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,6 +17,7 @@
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "express-easy-zip": "^1.1.5",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
     "express-zip": "^3.0.0",
@@ -30,5 +31,13 @@
     "rand-token": "^1.0.1",
     "serve-index": "^1.9.1",
     "wakeonlan": "^0.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cyrof/pi_website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Cyrof/pi_website/issues"
+  },
+  "homepage": "https://github.com/Cyrof/pi_website#readme"
 }
