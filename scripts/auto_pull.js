@@ -34,4 +34,4 @@ npmUpdate = function(){
 }
 
 module.exports.pull = pull;
-module.exports.npmUpdate = npmUdate;
+module.exports.npmUpdate = npmUpdate;
