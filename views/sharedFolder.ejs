@@ -16,7 +16,7 @@
             <div class="container">
                 <table class="folder">
                     <% if (content) {%>
-                        <tr>
+                        <tr class="file-header">
                             <th>Filename</th>
                             <th>Type</th>
                             <th>Size</th>
@@ -26,7 +26,7 @@
                         <% for (const obj in content) {%>
                             <tr class="file">
                                 <% for (const key in content[obj]) {%>
-                                    <td>
+                                    <td class="file-content">
                                         <% if (dir) {%>
                                             <a href="/sharedFolder?path=<%= content[obj]['name'] %>&dir=<%= dir %>"><%= content[obj][key] %></a>
                                         <% } else {%>
@@ -34,12 +34,12 @@
                                         <% } %>
                                     </td>
                                 <% } %>
-                                <td>
+                                <td class="file-content">
                                     <div class="DbtnBox">
                                         <% if (dir) {%>
-                                            <a href="/sharedFolder/download?path=<%= content[obj]['name'] %>&dir=<%= dir %>" class="Dbtn"><i class="bi bi-download"></i>Download</a>
+                                            <a href="/sharedFolder/download?path=<%= content[obj]['name'] %>&dir=<%= dir %>" class="Dbtn"><div class="btn-icon"><i class="bi bi-box-arrow-down"></i></div><span>Download</span></a>
                                         <% } else {%>
-                                            <a href="/sharedFolder/download?path=<%= content[obj]['name'] %>" class="Dbtn"><i class="bi bi-download"></i>Download</a>
+                                            <a href="/sharedFolder/download?path=<%= content[obj]['name'] %>" class="Dbtn"><div class="btn-icon"><i class="bi bi-box-arrow-down"></i></div><span>Download</span></a>
                                         <% } %>
                                     </div>
                                 </td>

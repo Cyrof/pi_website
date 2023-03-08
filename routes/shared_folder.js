@@ -112,8 +112,6 @@ router.get('/download', (req, res) => {
         console.log(path);
         res.download(path);
     }
-
-    // res.redirect('/sharedFolder');
-})
+});
 
 module.exports = router;
