@@ -28,6 +28,11 @@ function checkFile(fileName, data) {
 // functoin to read file and return data
 function readFile(path) {
     data = fs.readFileSync(path, { encoding: 'utf8' })
+    data_list = data.split(/\n/)
+    filtered_data_list = data_list.filter((elem) => elem !== '')
+    add_br = filtered_data_list.flatMap((element, index, array) => 
+        array.length -1 !== index ? [element, '</br>'] : element)
+    data = add_br.join('')
     return data
 }
 
