@@ -14,6 +14,61 @@
     <%- include('./partials/side_bar'); %>
         <div class="wrapper">
             <div class="container">
+                <div class="upload-button">
+                    <button id="upload-model-btn">Upload</button>
+                </div>
+                <div class="model-container">
+                    <div class="model-content">
+                        <span class="close">&times;</span>
+                        <h2>upload folder form</h2>
+                        <form action="#" class="upload-form">
+                            <div class="upload-content">
+                                <label for="drag-drop">
+                                    <strong>Choose a file</strong>
+                                    <span> or drag it here.</span>
+                                    <input type="file" id="drag-drop" multiple="true" required>
+                                    <br>
+                                    <span id="file-name"></span>
+                                </label>
+                            </div>
+                            <input type="submit" value="Upload">
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    // upload folder 
+                    let input = $('#drag-drop');
+                    let fileName = $('#file-name');
+
+                    input.change(function () {
+                        console.log('hi')
+                        let inputFile = document.querySelector('input[type=file]').files[0];
+                        fileName.text(inputFile.name);
+                    })
+
+                    // js for modals
+                    let modal = $('.model-container');
+                    let btn = $('#upload-model-btn');
+                    let close_btn = $('.close');
+
+                    // make btn open model content
+                    btn.click(function () {
+                        console.log('hi')
+                        modal.show();
+                    });
+                    // make close btn close model content
+                    close_btn.click(function () {
+                        modal.hide();
+                    });
+                    // make it so user click outside of box to close
+                    window.onclick = function () {
+                        if ($(event.target).is(modal)) {
+                            modal.hide()
+                        }
+                    }
+
+
+                </script>
                 <table class="folder">
                     <% if (content) {%>
                         <tr class="file-header">
@@ -28,24 +83,36 @@
                                 <% for (const key in content[obj]) {%>
                                     <td class="file-content">
                                         <% if (dir) {%>
-                                            <a href="/sharedFolder?path=<%= content[obj]['name'] %>&dir=<%= dir %>"><%= content[obj][key] %></a>
-                                        <% } else {%>
-                                            <a href="/sharedFolder?path=<%= content[obj]['name'] %>"><%= content[obj][key] %></a>
-                                        <% } %>
+                                            <a href="/sharedFolder?path=<%= content[obj]['name'] %>&dir=<%= dir %>">
+                                                <%= content[obj][key] %>
+                                            </a>
+                                            <% } else {%>
+                                                <a href="/sharedFolder?path=<%= content[obj]['name'] %>">
+                                                    <%= content[obj][key] %>
+                                                </a>
+                                                <% } %>
                                     </td>
-                                <% } %>
-                                <td class="file-content">
-                                    <div class="DbtnBox">
-                                        <% if (dir) {%>
-                                            <a href="/sharedFolder/download?path=<%= content[obj]['name'] %>&dir=<%= dir %>" class="Dbtn"><div class="btn-icon"><i class="bi bi-box-arrow-down"></i></div><span>Download</span></a>
-                                        <% } else {%>
-                                            <a href="/sharedFolder/download?path=<%= content[obj]['name'] %>" class="Dbtn"><div class="btn-icon"><i class="bi bi-box-arrow-down"></i></div><span>Download</span></a>
-                                        <% } %>
-                                    </div>
-                                </td>
+                                    <% } %>
+                                        <td class="file-content">
+                                            <div class="DbtnBox">
+                                                <% if (dir) {%>
+                                                    <a href="/sharedFolder/download?path=<%= content[obj]['name'] %>&dir=<%= dir %>"
+                                                        class="Dbtn">
+                                                        <div class="btn-icon"><i class="bi bi-box-arrow-down"></i></div>
+                                                        <span>Download</span>
+                                                    </a>
+                                                    <% } else {%>
+                                                        <a href="/sharedFolder/download?path=<%= content[obj]['name'] %>"
+                                                            class="Dbtn">
+                                                            <div class="btn-icon"><i class="bi bi-box-arrow-down"></i>
+                                                            </div><span>Download</span>
+                                                        </a>
+                                                        <% } %>
+                                            </div>
+                                        </td>
                             </tr>
-                        <% } %>
-                    <% } %>
+                            <% } %>
+                                <% } %>
                 </table>
             </div>
         </div>

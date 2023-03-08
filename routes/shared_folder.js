@@ -105,9 +105,10 @@ router.get('/download', (req, res) => {
                 var d = {path: path+`/${data[key]['name']}`, name: data[key]['name']}
             }
             array_data.push(d);
-            console.log(array_data)
-            res.zip({files: array_data, filename:fName});
         }
+        console.log('hi')
+        console.log(array_data)
+        res.zip({files: array_data, filename:fName});
     } else {
         console.log(path);
         res.download(path);
