@@ -23,13 +23,17 @@
                         <h2>upload folder form</h2>
                         <form action="#" class="upload-form">
                             <div class="upload-content">
-                                <label for="drag-drop">
+                                <!-- <label for="drag-drop">
                                     <strong>Choose a file</strong>
                                     <span> or drag it here.</span>
-                                    <input type="file" id="drag-drop" multiple="true" required>
+                                    <input type="file" id="drag-drop" multiple onchange="handleFiles(this.files)"
+                                        required>
                                     <br>
                                     <span id="file-name"></span>
-                                </label>
+                                </label> -->
+                                <input type="file" id="drag-drop" multiple onchange="handleFiles(this.files)" required>
+                                <label for="drag-drop"><strong>Choose a file</strong><span> or drag it here.</span></label>
+                                <span id="file-name"></span>
                             </div>
                             <input type="submit" value="Upload">
                         </form>
@@ -37,14 +41,59 @@
                 </div>
                 <script>
                     // upload folder 
-                    let input = $('#drag-drop');
-                    let fileName = $('#file-name');
+                    // let input = $('#drag-drop');
+                    // let fileName = $('#file-name');
 
-                    input.change(function () {
+                    // input.change(function () {
+                    //     console.log('hi')
+                    //     let inputFile = document.querySelector('input[type=file]').files[0];
+                    //     fileName.text(inputFile.name);
+                    // })
+
+                    let dropArea = $('.upload-content');
+                    ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                        dropArea.on(eventName, preventDefaults, false);
+                    });
+
+                    function preventDefaults(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+
+                    ;['dragenter', 'dragover'].forEach(eventName => {
+                        dropArea.on(eventName, highlight, false);
+                    });
+
+                    ;['dragleave', 'drop'].forEach(eventName => {
+                        dropArea.on(eventName, unhighlight, false);
+                    });
+
+                    function highlight(e) {
+                        dropArea.addClass('highlight');
+                    }
+                    function unhighlight(e) {
+                        dropArea.removeClass('highlight');
+                    }
+
+                    dropArea.on('drop', handleDrop, false);
+
+                    function handleDrop(e) {
+                        let dt = e.dataTransfer;
+                        let files = dt.files;
+                        console.loge(files)
+                        handleFiles(files);
+                    }
+
+                    function handleFiles(files) {
+                        let num = 0
+                        // ([...files]).forEach(file => {
+                        //     console.log(file.name);
+                        //     num += 1;
+                        //     $('#file-name').text(file.name);
+                        // });
                         console.log('hi')
-                        let inputFile = document.querySelector('input[type=file]').files[0];
-                        fileName.text(inputFile.name);
-                    })
+                        console.log(files);
+                    }
 
                     // js for modals
                     let modal = $('.model-container');

@@ -127,7 +127,7 @@
     background-color: #232327;
     border: 1px solid #39393d;
     width: 50%;
-    height: 10rem;
+    height: 20rem;
     margin: 10rem auto;
     padding: 1rem;
 }
@@ -160,14 +160,18 @@
     background-color: #424247;
     outline: 2px dashed black;
     outline-offset: -10px;
-    height: 5rem;
+    height: 10rem;
     padding: 1em;
     text-align: center !important; 
     width: 100%;
 }
 
 #drag-drop{
-    display: none;
+    /* display: none; */
+}
+
+.highlight {
+    background-color: #3a3a3d;
 }
 
 .upload-content>label{
