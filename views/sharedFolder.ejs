@@ -21,7 +21,7 @@
                     <div class="model-content">
                         <span class="close">&times;</span>
                         <h2>upload folder form</h2>
-                        <form action="#" class="upload-form">
+                        <form action="/sharedFolder/upload" class="upload-form" method="post" enctype="multipart/form-data">
                             <div class="upload-content">
                                 <!-- <label for="drag-drop">
                                     <strong>Choose a file</strong>
@@ -31,9 +31,9 @@
                                     <br>
                                     <span id="file-name"></span>
                                 </label> -->
-                                <input type="file" id="drag-drop" multiple onchange="handleFiles(this.files)" required>
-                                <label for="drag-drop"><strong>Choose a file</strong><span> or drag it here.</span></label>
-                                <span id="file-name"></span>
+                                <input type="file" name="files" id="drag-drop" multiple required>
+                                <!-- <label for="drag-drop"><strong>Choose a file</strong><span> or drag it here.</span></label>
+                                <span id="file-name"></span> -->
                             </div>
                             <input type="submit" value="Upload">
                         </form>

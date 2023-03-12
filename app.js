@@ -14,6 +14,9 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
 const serveIndex = require('serve-index');
 const zip = require('express-easy-zip');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 // create app variable
 const app = express();

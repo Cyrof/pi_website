@@ -6,11 +6,8 @@ const checker = require('../scripts/sess_checker');
 const User = require('../models/database_model');
 const fs = require('fs');
 const zip = require('express-easy-zip');
+const multer = require('multer');
 
-// function readfile(path){
-//     data = fs.readFileSync(path, {encoding: 'utf8'})
-//     return data
-// }
 
 // function to check if file exists
 function checkFile(fileName, data) {
@@ -30,8 +27,8 @@ function readFile(path) {
     data = fs.readFileSync(path, { encoding: 'utf8' })
     data_list = data.split(/\n/)
     filtered_data_list = data_list.filter((elem) => elem !== '')
-    add_br = filtered_data_list.flatMap((element, index, array) => 
-        array.length -1 !== index ? [element, '</br>'] : element)
+    add_br = filtered_data_list.flatMap((element, index, array) =>
+        array.length - 1 !== index ? [element, '</br>'] : element)
     data = add_br.join('')
     return data
 }
@@ -98,21 +95,41 @@ router.get('/download', (req, res) => {
         fName = data[i]['name'];
         data = require('../scripts/folderContent').getContentDetails(process.env.SHARED_FOLDER_PATH + `/${req.query.path}`);
         let array_data = [];
-        for (const key in data){
-            if (data[key]['type'] === 'directory'){
-                var d = {path: path+`/${data[key]['name']}/`, name: data[key]['name']}
+        for (const key in data) {
+            if (data[key]['type'] === 'directory') {
+                var d = { path: path + `/${data[key]['name']}/`, name: data[key]['name'] }
             } else {
-                var d = {path: path+`/${data[key]['name']}`, name: data[key]['name']}
+                var d = { path: path + `/${data[key]['name']}`, name: data[key]['name'] }
             }
             array_data.push(d);
         }
-        console.log('hi')
         console.log(array_data)
-        res.zip({files: array_data, filename:fName});
+        res.zip({ files: array_data, filename: fName });
     } else {
         console.log(path);
         res.download(path);
     }
+});
+
+// upload files route
+var storage = multer.diskStorage({
+    destination: process.env.SHARED_FOLDER_PATH,
+    filename: function(req, file, cb){
+        cb(null, file.originalname);
+    }
+})
+dest = process.env.SHARED_FOLDER_PATH
+var upload = multer({storage:storage});
+
+// router.get('/upload', (req, res) => {
+//     res.redirect('/sharedFolder');
+// })
+
+router.post('/upload', upload.array('files'),(req, res) => {
+    console.log('hi')
+    console.log(req.body)
+    console.log(req.files)
+    res.redirect('/sharedFolder')
 });
 
 module.exports = router;
