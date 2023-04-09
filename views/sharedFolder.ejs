@@ -20,79 +20,81 @@
                 <div class="model-container">
                     <div class="model-content">
                         <span class="close">&times;</span>
-                        <h2>upload folder form</h2>
-                        <form action="/sharedFolder/upload" class="upload-form" method="post" enctype="multipart/form-data">
-                            <div class="upload-content">
-                                <!-- <label for="drag-drop">
-                                    <strong>Choose a file</strong>
-                                    <span> or drag it here.</span>
-                                    <input type="file" id="drag-drop" multiple onchange="handleFiles(this.files)"
-                                        required>
-                                    <br>
-                                    <span id="file-name"></span>
-                                </label> -->
-                                <input type="file" name="files" id="drag-drop" multiple required>
-                                <!-- <label for="drag-drop"><strong>Choose a file</strong><span> or drag it here.</span></label>
-                                <span id="file-name"></span> -->
-                            </div>
-                            <input type="submit" value="Upload">
-                        </form>
+                        <div id="upload-content">
+                            <form action="/sharedFolder/upload" class="upload-form" method="post"
+                                enctype="multipart/form-data">
+                                <i class="bi bi-cloud-arrow-up-fill"></i>
+                                <p>Drag & Drop to Upload File <br> OR</p>
+                                <input type="file" name="files" id="drag-drop" onchange="handleFiles(this.files)" multiple required>
+                                <label class="slc-btn" for="drag-drop" id="drag-drop-lab">Browse Files</label>
+                                
+                            </form>
+                            <div class="show-files"></div>
+                            <input type="submit" value="Upload" id="upload-sub" onclick="uploadFile()">
+                        </div>
                     </div>
                 </div>
                 <script>
-                    // upload folder 
-                    // let input = $('#drag-drop');
-                    // let fileName = $('#file-name');
+                    
+                    const file_array = []
+                    // js for drag and drop file upload
+                    let dropArea = document.getElementById('upload-content');
 
-                    // input.change(function () {
-                    //     console.log('hi')
-                    //     let inputFile = document.querySelector('input[type=file]').files[0];
-                    //     fileName.text(inputFile.name);
-                    // })
-
-                    let dropArea = $('.upload-content');
+                    // prevent default drag behaviors
                     ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                        dropArea.on(eventName, preventDefaults, false);
+                        dropArea.addEventListener(eventName, preventDefaults, false)
+                        document.body.addEventListener(eventName, preventDefaults, false)
                     });
 
-                    function preventDefaults(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
+                    dropArea.addEventListener('drop', handleDrop, false);
+
+                    function preventDefaults(e){
+                        e.preventDefault()
+                        e.stopPropagation()
+                    }
+                    
+                    function handleDrop(e){
+                        var dt = e.dataTransfer
+                        var files = dt.files
+                        handleFiles(files)
+                    }
+                    
+                    function handleFiles(files){
+                        var files = [...files]
+                        console.log(files)
+                        files.forEach(file => {file_array.push(file)})
+                        files.forEach(previewFile)
                     }
 
-                    ;['dragenter', 'dragover'].forEach(eventName => {
-                        dropArea.on(eventName, highlight, false);
-                    });
-
-                    ;['dragleave', 'drop'].forEach(eventName => {
-                        dropArea.on(eventName, unhighlight, false);
-                    });
-
-                    function highlight(e) {
-                        dropArea.addClass('highlight');
-                    }
-                    function unhighlight(e) {
-                        dropArea.removeClass('highlight');
+                    function previewFile(file){
+                        $('.show-files').append(`<p id='file'>${file.name}</p>`)
                     }
 
-                    dropArea.on('drop', handleDrop, false);
-
-                    function handleDrop(e) {
-                        let dt = e.dataTransfer;
-                        let files = dt.files;
-                        console.loge(files)
-                        handleFiles(files);
-                    }
-
-                    function handleFiles(files) {
-                        let num = 0
-                        // ([...files]).forEach(file => {
-                        //     console.log(file.name);
-                        //     num += 1;
-                        //     $('#file-name').text(file.name);
-                        // });
-                        console.log('hi')
-                        console.log(files);
+                    // upload files
+                    function uploadFile() {
+                        console.log(file_array);
+                        // var url = "http://localhost:8080/sharedFolder/upload"
+                        // var xhr = new XMLHttpRequest()
+                        // var formData = new FormData()
+                        // xhr.open("POST", url, true)
+                        // xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+                        // xhr.onreadystatechange = () => {
+                        //     if (xhr.readyState === 4 && xhr.status === 200) {
+                        //         // console.log(xhr.responseText);
+                        //     }
+                        // }
+                        // formData.append('file', file_array);
+                        // xhr.send(formData);
+                        var formData = new FormData();
+                        formData.append('file', file_array);
+                        console.log(formData)
+                        $.ajax({
+                            url : "http://localhost:8080/sharedFolder/upload",
+                            data : formData,
+                            processData : false,
+                            contentType : false,
+                            type : 'POST'
+                        });
                     }
 
                     // js for modals

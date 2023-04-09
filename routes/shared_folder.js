@@ -126,7 +126,6 @@ var upload = multer({storage:storage});
 // })
 
 router.post('/upload', upload.array('files'),(req, res) => {
-    console.log('hi')
     console.log(req.body)
     console.log(req.files)
     res.redirect('/sharedFolder')
