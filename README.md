@@ -1,8 +1,8 @@
 # Pi Website
 ## Raspberry pi website for home server
 # Table of contents
-* [General info](general-information)
-* [Technology](technology)
+* [General info](#general-information)
+* [Technology](#technology)
 
 ## General Information
 This project is a raspberry pi website for my home server with features to control other servers on my home server for ease of use.
