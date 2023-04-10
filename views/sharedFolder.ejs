@@ -25,18 +25,22 @@
                                 enctype="multipart/form-data">
                                 <i class="bi bi-cloud-arrow-up-fill"></i>
                                 <p>Drag & Drop to Upload File <br> OR</p>
-                                <input type="file" name="files" id="drag-drop" onchange="handleFiles(this.files)" multiple required>
+                                <input type="file" name="files" id="drag-drop" multiple required>
                                 <label class="slc-btn" for="drag-drop" id="drag-drop-lab">Browse Files</label>
-                                
+                                <div class="show-files"></div>
+                                <input type="submit" value="Upload" id="upload-sub">
                             </form>
-                            <div class="show-files"></div>
-                            <input type="submit" value="Upload" id="upload-sub" onclick="uploadFile()">
                         </div>
                     </div>
                 </div>
                 <script>
-                    
-                    const file_array = []
+
+                    // onchange function for file input 
+                    $('#drag-drop').change(function (event) {
+                        handleFiles(event.target.files);
+                    })
+
+
                     // js for drag and drop file upload
                     let dropArea = document.getElementById('upload-content');
 
@@ -48,54 +52,55 @@
 
                     dropArea.addEventListener('drop', handleDrop, false);
 
-                    function preventDefaults(e){
+                    function preventDefaults(e) {
                         e.preventDefault()
                         e.stopPropagation()
                     }
-                    
-                    function handleDrop(e){
+
+                    function handleDrop(e) {
                         var dt = e.dataTransfer
                         var files = dt.files
+                        $("#drag-drop").get(0).files = files
                         handleFiles(files)
                     }
-                    
-                    function handleFiles(files){
+
+                    function handleFiles(files) {
                         var files = [...files]
-                        console.log(files)
-                        files.forEach(file => {file_array.push(file)})
+                        // console.log(files)
                         files.forEach(previewFile)
                     }
 
-                    function previewFile(file){
+                    function previewFile(file) {
                         $('.show-files').append(`<p id='file'>${file.name}</p>`)
                     }
 
                     // upload files
-                    function uploadFile() {
-                        console.log(file_array);
-                        // var url = "http://localhost:8080/sharedFolder/upload"
-                        // var xhr = new XMLHttpRequest()
-                        // var formData = new FormData()
-                        // xhr.open("POST", url, true)
-                        // xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-                        // xhr.onreadystatechange = () => {
-                        //     if (xhr.readyState === 4 && xhr.status === 200) {
-                        //         // console.log(xhr.responseText);
-                        //     }
-                        // }
-                        // formData.append('file', file_array);
-                        // xhr.send(formData);
-                        var formData = new FormData();
-                        formData.append('file', file_array);
-                        console.log(formData)
-                        $.ajax({
-                            url : "http://localhost:8080/sharedFolder/upload",
-                            data : formData,
-                            processData : false,
-                            contentType : false,
-                            type : 'POST'
-                        });
-                    }
+                    // function uploadFile() {
+                    //     console.log(file_array);
+                    //     console.log($('#drag-drop').val());
+                    //     // var url = "http://localhost:8080/sharedFolder/upload"
+                    //     // var xhr = new XMLHttpRequest()
+                    //     // var formData = new FormData()
+                    //     // xhr.open("POST", url, true)
+                    //     // xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+                    //     // xhr.onreadystatechange = () => {
+                    //     //     if (xhr.readyState === 4 && xhr.status === 200) {
+                    //     //         // console.log(xhr.responseText);
+                    //     //     }
+                    //     // }
+                    //     // formData.append('file', file_array);
+                    //     // xhr.send(formData);
+                    //     var formData = new FormData();
+                    //     formData.append('file', file_array);
+                    //     console.log(formData)
+                    //     $.ajax({
+                    //         url: "http://localhost:8080/sharedFolder/upload",
+                    //         data: formData,
+                    //         processData: false,
+                    //         contentType: false,
+                    //         type: 'POST'
+                    //     });
+                    // }
 
                     // js for modals
                     let modal = $('.model-container');
@@ -104,7 +109,7 @@
 
                     // make btn open model content
                     btn.click(function () {
-                        console.log('hi')
+                        // console.log('hi')
                         modal.show();
                     });
                     // make close btn close model content

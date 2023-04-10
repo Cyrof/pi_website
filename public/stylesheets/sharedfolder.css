@@ -4,7 +4,7 @@
     display: flex;
     width: calc(100vw - 15rem);
     height: calc(100vh - 5rem);
-    left:15rem;
+    left: 15rem;
     margin-left: 15rem;
 }
 
@@ -26,31 +26,31 @@
     font-size: 1.1rem;
 }
 
-.file-header>th{
+.file-header>th {
     padding: 10px;
 }
 
-.file{
+.file {
     background-color: #343438;
 }
 
-.file:hover{
+.file:hover {
     background-color: #353232;
 }
 
-.file:hover td>a{
+.file:hover td>a {
     color: #d3d3d3;
 }
 
-.file:nth-of-type(odd){
+.file:nth-of-type(odd) {
     background-color: #3c3c3f;
 }
 
-.file:nth-of-type(odd):hover{
+.file:nth-of-type(odd):hover {
     background-color: #353232;
 }
 
-.file:nth-of-type(odd):hover td>a{
+.file:nth-of-type(odd):hover td>a {
     color: #d3d3d3;
 }
 
@@ -60,20 +60,20 @@
     font-size: 1rem;
 }
 
-.file-content>a{
+.file-content>a {
     text-decoration: none;
     /* color: rgb(255, 169, 70); */
     color: #F7F8FC;
 }
 
-.file-content>a:hover{
+.file-content>a:hover {
     text-decoration: none;
     color: #d3d3d3;
 }
 
 
 /* download button style */
-.DbtnBox{
+.DbtnBox {
     background-color: #7e57c2;
     border-radius: 10px;
     /* text-align: center; */
@@ -81,7 +81,7 @@
     text-align: center;
 }
 
-.btn-icon{
+.btn-icon {
     position: relative;
     height: 1.5em;
     text-align: center;
@@ -100,11 +100,11 @@
     justify-content: center;
 }
 
-.DbtnBox:hover{
+.DbtnBox:hover {
     background-color: #7651b6;
 }
 
-.Dbtn:hover{
+.Dbtn:hover {
     color: #dddddd;
     text-decoration: none;
 }
@@ -119,7 +119,7 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .model-content {
@@ -127,12 +127,12 @@
     background-color: #232327;
     border: 1px solid #39393d;
     width: 50%;
-    height: 28rem;
+    height: 30rem;
     margin: 10rem auto;
     padding: 1rem;
 }
 
-.close{
+.close {
     color: #999898 !important;
     float: right !important;
     font-size: 2em !important;
@@ -140,7 +140,7 @@
 }
 
 .close:hover,
-.close:focus{
+.close:focus {
     color: #7c7c7c;
     text-decoration: none;
     cursor: pointer;
@@ -148,69 +148,101 @@
 
 .upload-button {
     float: right;
-    bottom: 5rem;
+    margin-bottom: 1rem;
+}
+
+#upload-model-btn{
+    background-color: #7e57c2;
+    border-radius: 10px;
+    color: #F7F8FC;
+    width: 8em;
+    height: 2em;
+    border: 1px solid #7e57c2;
+}
+
+#upload-model-btn:hover{
+    background-color: #7651b6;
+    border: 1px solid #7651b6;
+
 }
 
 .upload-content {
     position: relative;
 }
 
-#upload-content{
+#upload-content {
     border: 1px solid black;
     background-color: #424247;
     outline: 2px dashed black;
     outline-offset: -10px;
-    height: 24rem;
+    height: 26rem;
     padding: 1em;
     margin-top: 2.5em;
-    text-align: center !important; 
+    text-align: center !important;
     width: 100%;
 }
 
-.upload-form{
-    display: flex;
+.upload-form {
+    width: 100%;
+    display: inline-flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1em;
 }
 
-.upload-form>i{
+
+.upload-form>i {
     font-size: 5em;
 }
 
-.upload-form>p{
+.upload-form>p {
     font-size: 1.5em;
 }
 
-#drag-drop{
+#drag-drop {
     display: none;
 }
 
-#drag-drop-lab{
+#drag-drop-lab {
     cursor: pointer;
-    border: 1px solid #ffffff;
+    border: 1px solid #F7F8FC;
     border-radius: 5px;
     color: black;
-    background: white;
+    background: #F7F8FC;
 }
 
-.show-files{
-    height: 3em;
+#drag-drop-lab:hover{
+    background-color: rgb(196, 196, 196);
+    border: 1px solid rgb(196, 196, 196);
 }
 
-#upload-sub{
-    float: right;
+
+#upload-sub {
+    border: 1px solid #F7F8FC;
+    border-radius: 5px;
+    color: black;
+    background: #F7F8FC;
+    width: 5rem;
+    margin-left: auto;
 }
 
-.show-files{
+#upload-sub:hover{
+    background-color: rgb(196, 196, 196);
+    border: 1px solid rgb(196, 196, 196);
+}
+
+.show-files {
     display: flex;
     flex-direction: row;
     gap: 1em;
+    height: 3em;
 }
 
-#file{
-    border: 1px solid white;
+#file {
+    border: 1px solid #F7F8FC;
+    color: black;
+    background: #F7F8FC;
     border-radius: 5px;
     padding: 2px;
 }
