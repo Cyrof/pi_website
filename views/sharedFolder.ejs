@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="sharedfolder.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <title>SharedFolder</title>
 </head>
 
@@ -25,7 +26,7 @@
                                 enctype="multipart/form-data">
                                 <i class="bi bi-cloud-arrow-up-fill"></i>
                                 <p>Drag & Drop to Upload File <br> OR</p>
-                                <input type="file" name="files" id="drag-drop" multiple required>
+                                <input type="file" name="files" id="drag-drop" multiple="multiple" required>
                                 <label class="slc-btn" for="drag-drop" id="drag-drop-lab">Browse Files</label>
                                 <div class="show-files"></div>
                                 <input type="submit" value="Upload" id="upload-sub">
@@ -33,98 +34,6 @@
                         </div>
                     </div>
                 </div>
-                <script>
-
-                    // onchange function for file input 
-                    $('#drag-drop').change(function (event) {
-                        handleFiles(event.target.files);
-                    })
-
-
-                    // js for drag and drop file upload
-                    let dropArea = document.getElementById('upload-content');
-
-                    // prevent default drag behaviors
-                    ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                        dropArea.addEventListener(eventName, preventDefaults, false)
-                        document.body.addEventListener(eventName, preventDefaults, false)
-                    });
-
-                    dropArea.addEventListener('drop', handleDrop, false);
-
-                    function preventDefaults(e) {
-                        e.preventDefault()
-                        e.stopPropagation()
-                    }
-
-                    function handleDrop(e) {
-                        var dt = e.dataTransfer
-                        var files = dt.files
-                        $("#drag-drop").get(0).files = files
-                        handleFiles(files)
-                    }
-
-                    function handleFiles(files) {
-                        var files = [...files]
-                        // console.log(files)
-                        files.forEach(previewFile)
-                    }
-
-                    function previewFile(file) {
-                        $('.show-files').append(`<p id='file'>${file.name}</p>`)
-                    }
-
-                    // upload files
-                    // function uploadFile() {
-                    //     console.log(file_array);
-                    //     console.log($('#drag-drop').val());
-                    //     // var url = "http://localhost:8080/sharedFolder/upload"
-                    //     // var xhr = new XMLHttpRequest()
-                    //     // var formData = new FormData()
-                    //     // xhr.open("POST", url, true)
-                    //     // xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-                    //     // xhr.onreadystatechange = () => {
-                    //     //     if (xhr.readyState === 4 && xhr.status === 200) {
-                    //     //         // console.log(xhr.responseText);
-                    //     //     }
-                    //     // }
-                    //     // formData.append('file', file_array);
-                    //     // xhr.send(formData);
-                    //     var formData = new FormData();
-                    //     formData.append('file', file_array);
-                    //     console.log(formData)
-                    //     $.ajax({
-                    //         url: "http://localhost:8080/sharedFolder/upload",
-                    //         data: formData,
-                    //         processData: false,
-                    //         contentType: false,
-                    //         type: 'POST'
-                    //     });
-                    // }
-
-                    // js for modals
-                    let modal = $('.model-container');
-                    let btn = $('#upload-model-btn');
-                    let close_btn = $('.close');
-
-                    // make btn open model content
-                    btn.click(function () {
-                        // console.log('hi')
-                        modal.show();
-                    });
-                    // make close btn close model content
-                    close_btn.click(function () {
-                        modal.hide();
-                    });
-                    // make it so user click outside of box to close
-                    window.onclick = function () {
-                        if ($(event.target).is(modal)) {
-                            modal.hide()
-                        }
-                    }
-
-
-                </script>
                 <table class="folder">
                     <% if (content) {%>
                         <tr class="file-header">
@@ -172,7 +81,7 @@
                 </table>
             </div>
         </div>
-
+        <script src="sharedFolder_static.js"></script>
 </body>
 
 </html>
