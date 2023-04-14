@@ -43,9 +43,9 @@
                             <th>Data Modified</th>
                             <th>Download</th>
                         </tr>
-                        <% for (const obj in content) {%>
-                            <tr class="file">
-                                <% for (const key in content[obj]) {%>
+                        <% var i=1; for (const obj in content) {%>
+                            <tr class="file" id="index-<%= i %>">
+                                <% i++; for (const key in content[obj]) {%>
                                     <td class="file-content">
                                         <% if (dir) {%>
                                             <a href="/sharedFolder?path=<%= content[obj]['name'] %>&dir=<%= dir %>">
@@ -79,6 +79,7 @@
                             <% } %>
                                 <% } %>
                 </table>
+                
             </div>
         </div>
         <script src="sharedFolder_static.js"></script>
