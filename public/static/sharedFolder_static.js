@@ -58,3 +58,64 @@ window.onclick = function () {
         modal.hide()
     }
 }
+
+// ========================================================= //
+// js for custom right click
+const contextMenu = document.querySelector('.contextMenu');
+const scope = $('.folder');
+
+scope.on("contextmenu", (event) => {
+    event.preventDefault();
+
+    const { clientX: mouseX, clientY: mouseY } = event;
+
+    const {normalisedX, normalisedY} = normalisePos(mouseX, mouseY);
+
+    contextMenu.style.top = `${normalisedY}px`;
+    contextMenu.style.left = `${normalisedX}px`;
+
+    contextMenu.classList.remove('visible');
+
+    setTimeout(() => {
+        contextMenu.classList.add('visible');
+    });
+
+    console.log(event.target.id)
+    
+});
+
+$(document).on('click', (event) => {
+    if (event.target.offsetParent != contextMenu){
+        contextMenu.classList.remove('visible');
+    }
+})
+
+const normalisePos = (mouseX, mouseY) => {
+    // compute what is the mouse position relative to the container element (scope)
+    const {
+        left: scopeOffsetX,
+        top: scopeOffsetY,
+    } = scope[0].getBoundingClientRect();
+
+    const scopeX = mouseX - scopeOffsetX;
+    const scopeY = mouseY - scopeOffsetY;
+
+    // check if the element will go out of bounds 
+    const outOfBoundsOnX = scopeX + contextMenu.clientWidth > scope[0].clientWidth;
+    const outOfBoundsOnY = scopeY + contextMenu.clientHeight > scope[0].clientHeight;
+
+    let normalisedX = mouseX;
+    let normalisedY = mouseY;
+
+    // normalise on X
+    if (outOfBoundsOnX){
+        normalisedX = scopeOffsetX + scope[0].clientWidth - contextMenu.clientWidth;
+    }
+
+    //normalise on Y
+    if (outOfBoundsOnY){
+        normalisedY = scopeOffsetY + scope[0].clientHeight - contextMenu.clientHeight;
+    }
+
+    return {normalisedX, normalisedY};
+};
