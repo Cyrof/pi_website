@@ -44,9 +44,9 @@
                             <th>Download</th>
                         </tr>
                         <% var i=1; for (const obj in content) {%>
-                            <tr class="file" id="index-<%= i %>">
-                                <% i++; for (const key in content[obj]) {%>
-                                    <td class="file-content">
+                            <tr class="file" >
+                                <% for (const key in content[obj]) {%>
+                                    <td class="file-content" id="index-<%= i %>">
                                         <% if (dir) {%>
                                             <a href="/sharedFolder?path=<%= content[obj]['name'] %>&dir=<%= dir %>">
                                                 <%= content[obj][key] %>
@@ -76,7 +76,7 @@
                                             </div>
                                         </td>
                             </tr>
-                            <% } %>
+                            <% i++; } %>
                                 <% } %>
                 </table>
                 <div class="contextMenu">

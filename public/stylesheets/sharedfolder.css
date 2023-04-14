@@ -8,6 +8,13 @@
     margin-left: 15rem;
 }
 
+.container{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 
 /* folder style */
 .folder {
@@ -248,7 +255,31 @@
 }
 
 /* custom right click */
-/* =================================== */
+/* ================================================ */
 .contextMenu{
-    display: None;
+    position: fixed;
+    z-index: 10000;
+    width: 10rem;
+    background: #1a1919;
+    border-radius: 5px;
+    transform: scale(0);
+    transform-origin: top left;
+}
+
+.contextMenu.visible{
+    transform: scale(1);
+    transition: transform 200ms ease-in-out;
+}
+
+.contextMenu .item{
+    padding: 8px 10px;
+    font-size: 1em;
+    font-family: 'Courier New', Courier, monospace;
+    color: #eee;
+    cursor: pointer;
+    border-radius: inherit;
+}
+
+.contextMenu .item:hover{
+    background: #252424;
 }
