@@ -80,7 +80,12 @@ scope.on("contextmenu", (event) => {
         contextMenu.classList.add('visible');
     });
 
-    console.log(event.target.id)
+    // console.log(event.target.parentElement)
+    // ====================================================== //
+    // dynamically make context menu clickable
+    // make right click open file or folder 
+    open(event.target)
+
     
 });
 
@@ -119,3 +124,19 @@ const normalisePos = (mouseX, mouseY) => {
 
     return {normalisedX, normalisedY};
 };
+
+const open = (elem) => {
+    const opn = $('opn')
+    var tag = elem.tagName
+    if (tag === 'A'){
+        var path = elem.getAttribute('href').split('?')
+        var url = window.location.href + `?${path[1]}`
+        console.log(url)
+        console.log(path)
+    }
+
+    opn.click(function(){
+        window.location.assign(url)
+        console.log('open clicked')
+    })
+}
