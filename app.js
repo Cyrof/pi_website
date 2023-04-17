@@ -21,11 +21,9 @@ dotenv.config();
 // create app variable
 const app = express();
 
-// create config variable
-const config = require('./config');
 
 // set up port 
-const port = process.env.PORT || config.port;
+const port = process.env.PORT || 8080;
 
 // set up routes
 const home = require('./routes/home');
