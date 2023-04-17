@@ -82,7 +82,7 @@ jobs:
         title: Code scanning alerts found
         body: |
           Code scanning alerts were found in your code. Please review the attached report and take appropriate action.
-        labels: vunerability
+        labels: vulnerability
         assignees: Cyrof
         projects: |
           {
