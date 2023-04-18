@@ -1,12 +1,32 @@
 // script to read and write dynamic url into readme file 
 // include fs for file read/write
 const fs = require('fs');
+// include simple-git to be able to use git commands in node
+const simpleGit = require('simple-git');
+const git = simpleGit.default();
+// include dotenv to be able to access .env file 
+const dotenv = require('dotenv');
+dotenv.config();
 
 // global variables
 const path = "./README.md";
 
 // ========================================= //
-// functoin to read the read me file and get pos to write url to 
+// function to push updated readme file to github 
+
+async function pushReadme() {
+    var branch = process.env.GIT_BRANCH
+    await git.checkout(branch)
+    await git.add(path);
+    console.log("README.md staged...")
+    await git.commit('Update readme');
+    console.log("Committed changes...")
+    await git.push('origin');
+    console.log("Pushed to github...")
+}
+
+// ========================================= //
+// function to get content of the readme file and update the url
 
 var update_url = function(url) {
     fs.readFile(path, function(err, data){
@@ -29,6 +49,7 @@ var update_url = function(url) {
         var bufferedText = new Buffer(content);
         fs.writeSync(f, bufferedText);
     });
+    pushReadme();
 }
 
 module.exports = update_url;
