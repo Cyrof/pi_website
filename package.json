@@ -33,6 +33,7 @@
     "nodemon": "^2.0.20",
     "rand-token": "^1.0.1",
     "serve-index": "^1.9.1",
+    "simple-git": "^3.17.0",
     "wakeonlan": "^0.1.0"
   },
   "repository": {

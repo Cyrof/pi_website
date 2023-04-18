@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const port = process.env.PORT || 8080;
 const auth_token = process.env.AUTH;
+const update_url = require('./scripts/url_update');
 
 // ==================================== //
 // config nodemon 
@@ -15,6 +16,8 @@ nodemon({
 
 let url = null
 
+// set functions to activate based on the status of nodemon 
+
 nodemon.on('start', async () => {
     if (!url) {
         url = await ngrok.connect({
@@ -22,6 +25,12 @@ nodemon.on('start', async () => {
             port: port,
             region: 'ap',
         });
+        // IMPORTANT 
+        // Make sure there is GIT_BRANCH env variable before running
+        // For more information visit https://github.com/Cyrof/pi_website/tree/master
+
+        // turn off for development to reduce cluttering git commits
+        update_url(url);
         console.log(`Server now available at ${url}`);
     };
 }).on('restart', () => {
@@ -29,6 +38,3 @@ nodemon.on('start', async () => {
 }).on('quit', async () => {
     await ngrok.kill();
 });
-// .on('quit', async () => {
-    // await ngrok.kill();
-// })
