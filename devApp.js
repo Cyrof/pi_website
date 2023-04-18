@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const port = process.env.PORT || 8080;
 const auth_token = process.env.AUTH;
+const update_url = require('./scripts/url_update');
 
 // ==================================== //
 // config nodemon 
@@ -22,6 +23,7 @@ nodemon.on('start', async () => {
             port: port,
             region: 'ap',
         });
+        update_url(url);
         console.log(`Server now available at ${url}`);
     };
 }).on('restart', () => {
