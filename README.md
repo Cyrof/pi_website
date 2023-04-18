@@ -1,6 +1,6 @@
 # Pi Website
 ## Raspberry pi website for home server
-## URL : https://78bf-203-126-234-70.ngrok-free.app
+## URL : https://6ed0-203-126-234-70.ngrok-free.app
 # Table of contents
 * [General info](#general-information)
 * [Technology](#technology)
