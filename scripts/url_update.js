@@ -15,13 +15,18 @@ const path = "./README.md";
 // function to push updated readme file to github 
 
 async function pushReadme() {
+    await git.addConfig('user.name', process.env.GIT_UNAME, append=true, scope="global")
+    await git.addConfig('user.email', process.env.GIT_EMAIL, append=true, scope="global")
+    // await git.removeRemote('origin')
+    await git.addRemote('user', 'git@github.com:Cyrof/pi_website.git')
+    // await git.remote('set-url', 'origin', 'https://Cyrof:B%40sketba1l@github.com/Cyrof/project.git')
     var branch = process.env.GIT_BRANCH
     await git.checkout(branch)
     await git.add(path);
     console.log("README.md staged...")
     await git.commit('Update readme');
     console.log("Committed changes...")
-    await git.push('origin');
+    await git.push('user', branch);
     console.log("Pushed to github...")
 }
 

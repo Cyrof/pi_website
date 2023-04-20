@@ -80,7 +80,6 @@ scope.on("contextmenu", (event) => {
         contextMenu.classList.add('visible');
     });
 
-    // console.log(event.target.parentElement)
     // ====================================================== //
     // dynamically make context menu clickable
     // make right click open file or folder 
