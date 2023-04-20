@@ -1,6 +1,6 @@
 # Pi Website
 ## Raspberry pi website for home server
-## URL : https://6ed0-203-126-234-70.ngrok-free.app
+## URL : https://24d8-116-87-173-227.ngrok-free.app
 # Table of contents
 * [General info](#general-information)
 * [Technology](#technology)
@@ -55,7 +55,7 @@ You can download the zip file [here](https://github.com/Cyrof/pi_website/archive
 #### .env file format
 Copy the following into your .env file and change the following accordingly.
 ```environment
-    DATABASE_URL=mongodb+srv://{username}:{password}@{cluster_name}.0ojvmtj.mongodb.net/{database_name}?retryWrites=true&w=majority
+    https://24d8-116-87-173-227.ngrok-free.app
     SECRET_KEY={hexadecimal_secret_key}
     SHARED_FOLDER_PATH={Path_for_sharedfolder}
     PORT={port}
@@ -75,7 +75,7 @@ After creating the cluster, create a database as well as 2 collections named **u
 
 To do the following, navigate into the cluster by clicking on the **Browse Collection** button. Then in **Collections** tab click on **Create Database** button to create the database and collections.
 
-After creating the required database and collections, add the following into your .env file by editing the **DATABASE_URL** variable:
+After creating the required database and collections, add the following into your .env file by editing the **DATABASE_URL** https://24d8-116-87-173-227.ngrok-free.app
 * Username
 * Password
 * Cluster Name
