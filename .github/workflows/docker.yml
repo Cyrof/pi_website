@@ -8,17 +8,20 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@v3
-      - name: Build docker image
-        run: |
-          echo $PAT_TOKEN | docker login ghcr.io -u cyrof --password-stdin
-          docker build . --tag ghcr.io/cyrof/pi-website:latest
-          docker run -t ghcr.io/cyrof/pi-website:latest
-          docker push ghcr.io/cyrof/pi-website:latest
-        env:
-          PAT: ${{ secrets.PAT_TOKEN }}
+      - names: login to github container registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.PAT_TOKEN }}
+        - name: build docker image
+          run: |
+            docker build . --tag ghcr.io/cyrof/pi-website:latest
+            docker run ghcr.io/cyrof/pi-website:latest
+            docker push ghcr.io/cyrof/pi-website:latest
+
   docker:
     runs-on: ubuntu-latest
     steps:
