@@ -15,7 +15,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.DOCKER_PAT }}
+          password: ${{ secrets.PAT_TOKEN }}
       - name:  build docker image
         run: |
           docker build . --tag ghcr.io/cyrof/pi-website:latest
