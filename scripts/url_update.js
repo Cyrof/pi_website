@@ -10,17 +10,15 @@ dotenv.config();
 
 // global variables
 const path = "./README.md";
+const branch = process.env.GIT_BRANCH
 
 // ========================================= //
 // function to push updated readme file to github 
 
 async function pushReadme() {
-    await git.addConfig('user.name', process.env.GIT_UNAME, append=true, scope="global")
+    await git.addConfig('user.name', process.env.GIT_NAME, append=true, scope="global")
     await git.addConfig('user.email', process.env.GIT_EMAIL, append=true, scope="global")
-    // await git.removeRemote('origin')
-    await git.addRemote('user', 'git@github.com:Cyrof/pi_website.git')
-    // await git.remote('set-url', 'origin', 'https://Cyrof:B%40sketba1l@github.com/Cyrof/project.git')
-    var branch = process.env.GIT_BRANCH
+    await git.addRemote('user', `https://${process.env.GIT_UNAME}:${process.env.GIT_PAT}@github.com/${process.env.GIT_UNAME}/pi_website.git`)
     await git.checkout(branch)
     await git.add(path);
     console.log("README.md staged...")
@@ -33,7 +31,9 @@ async function pushReadme() {
 // ========================================= //
 // function to get content of the readme file and update the url
 
-var update_url = function(url) {
+var update_url = async function(url) {
+    await git.pull('origin', branch)
+    console.log("Pull from github...")
     fs.readFile(path, function(err, data){
         if (err) throw err;
 
