@@ -30,4 +30,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_UNAME }}/app:latest
+          tags: ${{ secrets.DOCKER_UNAME }}/pi_website_docker:latest
