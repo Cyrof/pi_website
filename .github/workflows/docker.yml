@@ -6,6 +6,19 @@ on:
       - 'master'
 
 jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build docker image
+        run: |
+          echo $PAT_TOKEN | docker login ghcr.io -u cyrof --password-stdin
+          docker build . --tag ghcr.io/cyrof/pi-website:latest
+          docker run -t ghcr.io/cyrof/pi-website:latest
+          docker push ghcr.io/cyrof/pi-website:latest
+        env:
+          PAT: ${{ secrets.PAT_TOKEN }}
   docker:
     runs-on: ubuntu-latest
     steps:
