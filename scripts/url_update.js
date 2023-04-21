@@ -16,6 +16,7 @@ const branch = process.env.GIT_BRANCH
 // function to push updated readme file to github 
 
 async function pushReadme() {
+    // try and catch to to catch err
     try {
         await git.addConfig('user.name', process.env.GIT_NAME, append = true, scope = "global")
         await git.addConfig('user.email', process.env.GIT_EMAIL, append = true, scope = "global")
