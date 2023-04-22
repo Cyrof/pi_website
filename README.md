@@ -36,7 +36,7 @@ You can clone the repository with the following command:
 git clone https://github.com/Cyrof/password_manager_2.0.git
 ```
 **OR** 
-You can download the zip file [here](https://github.com/Cyrof/pi_website/archive/refs/tags/v0.1-beta.zip) or the tar file [here](https://github.com/Cyrof/pi_website/archive/refs/tags/v0.1-beta.tar.gz).
+You can download the zip file [here](https://github.com/Cyrof/pi_website/archive/refs/tags/v0.2-beta.zip) or the tar file [here](https://github.com/Cyrof/pi_website/archive/refs/tags/v0.2-beta.tar.gz).
 
 
 ## Prerequisites
@@ -51,6 +51,10 @@ You can download the zip file [here](https://github.com/Cyrof/pi_website/archive
     - [Step 5 (Set port to use):](#step-5-set-port-to-use)
     - [Step 6 (Ngrok authentication token):](#step-6-ngrok-authentication-token)
     - [Step 7 (Set git branch for auto readme file url updates):](#step-7-set-git-branch-for-auto-readme-file-url-updates)
+    - [Step 8 (set your name for git config)](#step-8-set-your-name-for-git-config)
+    - [Step 9 (set your github email for git config)](#step-9-set-your-github-email-for-git-config)
+    - [Step 10 (set your github username for git config)](#step-10-set-your-github-username-for-git-config)
+    - [Step 11 (set your github personal access token)](#step-11-set-your-github-personal-access-token)
 
 #### .env file format
 Copy the following into your .env file and change the following accordingly.
@@ -61,10 +65,18 @@ Copy the following into your .env file and change the following accordingly.
     PORT={port}
     AUTH={NgrokAuthenticationToken}
     GIT_BRANCH={github_branch}
+    GIT_NAME={your_name}
+    GIT_EMAIL={your_github_email}
+    GIT_UNAME={Your_github_username}
+    GIT_PAT={your_github_personal_access_token}
 ```
 
 ##### Step 1 (Create .env file):
 Create the .env file in the same directory as the app.js file
+<br>
+OR
+<br>
+If you have downloaded it as a docker image or docker container, create the .env file on your file system first.
 
 ##### Step 2 (Create database on mongodb):
 Login to [mongodb](https://www.mongodb.com) and create a cluster with whatever cluster name. 
@@ -104,3 +116,22 @@ At the top of the page it should display your authentication token. Copy it and 
 Set The branch to your main branch on your git hub repository. Get the branch name and edit the **GIT_BRANCH** variable in the .env file.
 
 **IMPORTANT!!!** Please note that if you do not setup the required prerequisites the code will not work properly.
+
+##### Step 8 (set your name for git config)
+Set your own name for git cli config for the docker container to send git hub requests. Edit the **GIT_NAME** variable in the .env file.
+
+##### Step 9 (set your github email for git config)
+Set your github email for docker container to access github. Edit the **GIT_EMAIL** variable in the .env file.
+
+##### Step 10 (set your github username for git config)
+Set your github username to create a remote to github repository. Edit the **GIT_UNAME** variable in the .env file.
+
+##### Step 11 (set your github personal access token)
+To set up your github personal access token, click on this [link](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to have a detailed instructions on how to create a personal access token. After which, copy the personal access token and edit the **GIT_PAT** variable in the .env file.
+**IMPORTANT!!!** Please note that the personal access token is only viewable once. Once your have left or refreshed the page, it will no longer be accessible.
+
+##### IMPORTANT NOTE
+If your have downloaded this project as a docker image or docker container and have created the .env file outside of the project directory, please use this commands to get the .env file into the docker container
+``` console
+$ docker cp {path_to_.env} {container_name}:/usr/scr/app
+```
