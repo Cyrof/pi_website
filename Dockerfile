@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:latest
 
 # create app directory
 WORKDIR /usr/scr/app
@@ -11,7 +11,9 @@ COPY package*.json ./
 RUN npm install 
 # for production use 
 # RUN NPM ci --omit=dev
-RUN npm install npm@latest -g && npm install n -g && n latest
+# RUN npm install npm@latest -g && npm install n -g && n latest
+
+RUN ln -s "$(which node)" /usr/bin/node
 
 # bundle app source
 COPY . .
@@ -19,4 +21,5 @@ COPY . .
 # expose port to be used
 EXPOSE 8080
 
+# CMD ["which", "node"]
 CMD ["npm", "run", "dev"]
