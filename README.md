@@ -38,6 +38,12 @@ git clone https://github.com/Cyrof/password_manager_2.0.git
 **OR** 
 You can download the zip file [here](https://github.com/Cyrof/pi_website/archive/refs/tags/v0.2-beta.zip) or the tar file [here](https://github.com/Cyrof/pi_website/archive/refs/tags/v0.2-beta.tar.gz).
 
+#### Github package installation guide
+You can get the docker image from [here](https://github.com/Cyrof/pi_website/pkgs/container/pi-website). Use the command given on the page to get the docker image.
+
+#### Dockerhub installation guide
+You can get the docker image and container from my dockerhub repository [here](https://hub.docker.com/repository/docker/cyrof/pi_website_docker/general). The detailed installation guide can be found there.
+
 
 ## Prerequisites
 #### Environment setup for .env file
