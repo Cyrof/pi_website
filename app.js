@@ -9,25 +9,28 @@ const session = require('express-session');
 const createError = require('http-errors');
 const logger = require('morgan');
 const fs = require('fs');
-const flash = require('express-flash');
+// const flash = require('express-flash');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
+const serveIndex = require('serve-index');
+const zip = require('express-easy-zip');
+const dotenv = require('dotenv');
 
+dotenv.config();
 
 // create app variable
 const app = express();
 
-// create config variable
-const config = require('./config');
 
 // set up port 
-const port = process.env.PORT || config.port;
+const port = process.env.PORT || 8080;
 
 // set up routes
 const home = require('./routes/home');
 const webhook = require('./routes/webhook');
 const sys_info = require('./routes/system_information');
 const users = require('./routes/users');
+const sharedFolder = require('./routes/shared_folder');
 
 // set body parser
 const bodyParser = require('body-parser');
@@ -36,7 +39,7 @@ const bodyParser = require('body-parser');
 app.set('view engine', 'ejs');
 app.use(logger('common', {stream: fs.createWriteStream('./website.log', {flags: 'a'})}));
 app.use(logger('dev'));
-app.use(flash());
+// app.use(flash());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public/stylesheets'));
@@ -68,11 +71,15 @@ app.use(session({
     })
 }));
 
+// set zip to app
+app.use(zip());
+
 // set url routing 
 app.use('/', users);
 app.use('/home', home);
 app.use('/webhook', webhook);
 app.use('/sys-info', sys_info);
+app.use('/sharedFolder', sharedFolder);
 
 // catch 404 error and forward to error handler
 app.use(function (req, res, next) {

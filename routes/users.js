@@ -13,7 +13,13 @@ const tokenCheck = require('../scripts/token_checker');
 
 // login route
 let sess;
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+    if (req.session.token){
+        let user = await User.find({token:req.session.token});
+        if (user.length > 0){
+            res.redirect('/home')
+        }
+    }   
     res.render('../views/login', { valid: false, error: "" });
 })
 
@@ -102,7 +108,11 @@ function sendEmail(email, token) {
         from: 'hs.auto.noreply@gmail.com',
         to: Email,
         subject: 'Reset Password link',
-        html: '<h1>You requested to reset your password, kindly use this <a href="http://localhost:8080/reset-password?token='+Token+'">link</a> to reset your password</h1>'
+        // for testing purposes
+        // html: '<h1>You requested to reset your password, kindly use this <a href="http://localhost:8080/reset-password?token='+Token+'">link</a> to reset your password</h1>'
+
+        // for deployment
+        html: '<h1>You requested to reset your password, kindly use this <a href="http://25e4-116-87-173-227.ap.ngrok.io/reset-password?token='+Token+'">link</a> to reset your password</h1>'
     };
 
     mail.sendMail(mailOptions, function (error, info){
@@ -132,7 +142,6 @@ router.post('/reset-ps-link', async (req, res) => {
         let send = sendEmail(email, token);
         if (send != '0'){
             let data = { $set: {token: token}}
-            console.log(token)
             db.updateOne({email: email}, data, function (err, res){
                 if (err) throw err;
             })
@@ -147,15 +156,34 @@ router.post('/reset-ps-link', async (req, res) => {
         msg = "The email is not registered with us."
     }
 
-    req.flash(type, msg);
-    res.redirect('/forgot-password');
+    // req.flash(type, msg);
+    // res.redirect('/forgot-password');
+    res.render('../views/fgt_ps', {type: type, msg: msg})
 });
 
 // reset password link route
 router.get('/reset-password', tokenCheck, (req, res) =>{
     console.log(req.query.token);
-    res.render('../views/reset-password', {token: req.query.token});
-    // res.render('../views/reset-password');
+    res.render('../views/reset-password', {success: false,token: req.query.token});
+});
+
+router.post('/update-password', async (req, res) =>{
+    let body = req.body;
+    let user = await User.find({token: body.token});
+    let db = mongoose.connection.collection('users');
+    user = user[0];
+    let token = randtoken.generate(20);
+    let salt = await bcrypt.genSalt(10);
+    let pwd = await bcrypt.hash(body.pwd2, salt);
+
+    let data = {$set: {pwd: pwd, token: token}};
+    db.update({token:body.token}, data, function(err, res){
+        if (err) throw err;
+    });
+
+    console.log(body);
+    // res.redirect('/reset-password?token=' + body.token);
+    res.render('../views/reset-password', {success:true, token: body.token});
 });
 
 

@@ -17,7 +17,11 @@ pull = function () {
         console.log(`stdout: ${stdout}`);
     });
 
-    // do npm install to auto install packages after pull from github
+   
+}
+
+npmUpdate = function(){
+     // do npm install to auto install packages after pull from github
     exec('npm install', (err, stdout, stderr) => {
         if (err) {
             console.error(`error: ${err.message}`);
@@ -30,3 +34,4 @@ pull = function () {
 }
 
 module.exports.pull = pull;
+module.exports.npmUpdate = npmUpdate;

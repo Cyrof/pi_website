@@ -13,7 +13,7 @@ body{
 
 /* container style */
 .container {
-    height: 40%;
+    height: 35%;
     width: 20%;
     box-shadow: 1px 1px 1px 1px #d1cfcf;
     border-radius: 20px;
@@ -94,4 +94,39 @@ body{
 
 .update-btn>input:hover{
     background-color: lightgrey;
+}
+
+/* success page style */
+
+
+/* phone  media*/
+@media only screen and (max-width: 600px) {
+    .container{
+        height: 50%;
+        width: 70%;
+    }
+}
+
+/* portrait tablet media */
+@media only screen and (max-width: 1000px) and (min-width: 600px) {
+    .container {
+        height: 30%;
+        width: 60%;
+    }
+}
+
+/* landscape tablet media */
+@media only screen and (max-width: 1100px) and (min-width: 768px){
+    .container {
+        height: 40%;
+        width: 40%;
+    }
+}
+
+/* laptop/desktop media */
+@media only screen and (max-width: 1500px) and (min-width: 1200px){
+    .container {
+        height: 30%;
+        width: 30%;
+    }
 }

@@ -22,6 +22,9 @@
                         </script>
                     <% } else {%> 
                         <p id="error-msg"><%= error %></p>
+                        <script>
+                            $('.container').height($('.container').height() + 20);
+                        </script>
                     <% } %> 
                 </div>
                 <div class="grid-item">
