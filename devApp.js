@@ -23,7 +23,7 @@ nodemon.on('start', async () => {
         url = await ngrok.connect({
             authtoken: auth_token,
             port: port,
-            region: 'ap',
+            // region: 'ap',
         });
         // IMPORTANT 
         // Make sure there is GIT_BRANCH env variable before running

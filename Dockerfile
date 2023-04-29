@@ -9,19 +9,18 @@ WORKDIR /usr/scr/app
 COPY package*.json ./
 
 # install latest node / npm release
-RUN apt-get install -y git-core curl build-essential openssl libssl-dev \
- && git clone https://github.com/nodejs/node.git \
- && cd node \
- && ./configure \
- && make \
- && sudo make install
+# RUN apk add --update nodejs npm
+# RUN apk add --update npm
+RUN apk add nodejs npm
 
 RUN npm install 
 # for production use 
 # RUN NPM ci --omit=dev
 # RUN npm install npm@latest -g && npm install n -g && n latest
+RUN apk update
+RUN apk add --update nodejs npm
 
-RUN ln -s "$(which node)" /usr/bin/node
+# RUN ln -s "$(which node)" /usr/bin/node
 
 # bundle app source
 COPY . .
