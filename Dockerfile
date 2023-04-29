@@ -8,6 +8,14 @@ WORKDIR /usr/scr/app
 # where available (npm@5+)
 COPY package*.json ./
 
+# install latest node / npm release
+RUN apt-get install -y git-core curl build-essential openssl libssl-dev \
+ && git clone https://github.com/nodejs/node.git \
+ && cd node \
+ && ./configure \
+ && make \
+ && sudo make install
+
 RUN npm install 
 # for production use 
 # RUN NPM ci --omit=dev
