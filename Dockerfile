@@ -1,4 +1,4 @@
-FROM node:current-alpine3.16
+FROM node:current-alpine3.17
 
 # create app directory
 WORKDIR /usr/scr/app
