@@ -1,4 +1,4 @@
-FROM node:current-alpine3.17
+FROM node:latest
 
 # create app directory
 WORKDIR /usr/scr/app
@@ -11,14 +11,14 @@ COPY package*.json ./
 # install latest node / npm release
 # RUN apk add --update nodejs npm
 # RUN apk add --update npm
-RUN apk add nodejs npm
+# RUN apk add nodejs npm
 
 RUN npm install 
 # for production use 
 # RUN NPM ci --omit=dev
 # RUN npm install npm@latest -g && npm install n -g && n latest
-RUN apk update
-RUN apk add --update nodejs npm
+# RUN apk update
+# RUN apk add --update nodejs npm
 
 # RUN ln -s "$(which node)" /usr/bin/node
 
