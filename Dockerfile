@@ -22,6 +22,9 @@ RUN npm install
 
 # RUN ln -s "$(which node)" /usr/bin/node
 
+# create directory for drive mnt
+RUN mkdir mnt
+
 # bundle app source
 COPY . .
 
