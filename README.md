@@ -1,6 +1,6 @@
 # Pi Website
 ## Raspberry pi website for home server
-## URL : https://f976-116-87-173-227.ngrok-free.app
+## URL : https://41c4-116-87-173-227.ngrok-free.app
 # Table of contents
 * [General info](#general-information)
 * [Technology](#technology)
@@ -93,7 +93,7 @@ After creating the cluster, create a database as well as 2 collections named **u
 
 To do the following, navigate into the cluster by clicking on the **Browse Collection** button. Then in **Collections** tab click on **Create Database** button to create the database and collections.
 
-After creating the required database and collections, add the following into your .env file by editing the **DATABASE_URL** https://f976-116-87-173-227.ngrok-free.app
+After creating the required database and collections, add the following into your .env file by editing the **DATABASE_URL** https://41c4-116-87-173-227.ngrok-free.app
 * Username
 * Password
 * Cluster Name
