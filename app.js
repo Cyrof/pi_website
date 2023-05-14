@@ -16,14 +16,24 @@ const serveIndex = require('serve-index');
 const zip = require('express-easy-zip');
 const dotenv = require('dotenv');
 
-dotenv.config();
+// dotenv.config();
+try{
+    var db_url = process.env.DATABASE_URL
+    var port_env = process.env.PORT
+    var key = process.env.SECRET_KEY
+} catch(err) {
+    dotenv.config();
+    db_url = process.env.DATABASE_URL
+    port_env = process.env.PORT
+    key = process.env.SECRET_KEY
+}
 
 // create app variable
 const app = express();
 
 
 // set up port 
-const port = process.env.PORT || 8080;
+const port = port_env || 8080;
 
 // set up routes
 const home = require('./routes/home');
@@ -49,13 +59,13 @@ app.use(cookieParser());
 // import dotenv to setup database
 require('dotenv').config();
 const db = require('./db/database');
-const mongoString = process.env.DATABASE_URL;
+const mongoString = db_url;
 db(mongoString);
 
 // config session
 const TWO_HOURS = 1000 * 60 * 60 * 2;
 app.use(session({
-    secret: process.env.SECRET_KEY,
+    secret: key,
     saveUninitialized: false,
     name: 'session',
     cookie: {
