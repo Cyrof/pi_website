@@ -2,9 +2,16 @@
 const nodemon = require('nodemon');
 const ngrok = require('ngrok');
 const dotenv = require('dotenv');
-dotenv.config();
-const port = process.env.PORT || 8080;
-const auth_token = process.env.AUTH;
+// dotenv.config();
+try{
+    var port_env = process.env.PORT;
+    var auth_token = process.env.AUTH;
+} catch(err) {
+    dotenv.config()
+    port_env = process.env.PORT;
+    auth_token = process.env.AUTH;
+}
+const port = port_env || 8080;
 const update_url = require('./scripts/url_update');
 
 // ==================================== //
