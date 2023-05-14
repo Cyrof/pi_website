@@ -25,6 +25,9 @@ RUN npm install
 # create directory for drive mnt
 RUN mkdir mnt
 
+# create .env file
+RUN touch .env
+
 # bundle app source
 COPY . .
 
