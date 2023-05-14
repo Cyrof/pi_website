@@ -20,7 +20,11 @@ async function pushReadme() {
     try {
         await git.addConfig('user.name', process.env.GIT_NAME, append = true, scope = "global")
         await git.addConfig('user.email', process.env.GIT_EMAIL, append = true, scope = "global")
-        await git.addRemote('user', `https://${process.env.GIT_UNAME}:${process.env.GIT_PAT}@github.com/${process.env.GIT_UNAME}/pi_website.git`)
+        try{
+            await git.addRemote('user', `https://${process.env.GIT_UNAME}:${process.env.GIT_PAT}@github.com/${process.env.GIT_UNAME}/pi_website.git`)
+        } catch (err) {
+            console.log(err);
+        }
         await git.checkout(branch)
         await git.add(path);
         console.log("README.md staged...")
