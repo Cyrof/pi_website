@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sharedfolder.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <title>SharedFolder</title>
+</head>
+
+<body style="background-color: #232327;">
+    <!-- include nav bar -->
+    <%- include('./partials/side_bar'); %>
+        <div class="wrapper">
+            <div class="container">
+                <div class="upload-button">
+                    <button id="upload-model-btn">Upload</button>
+                </div>
+                <div class="model-container">
+                    <div class="model-content">
+                        <span class="close">&times;</span>
+                        <div id="upload-content">
+                            <form action="/sharedFolder/upload" class="upload-form" method="post"
+                                enctype="multipart/form-data">
+                                <i class="bi bi-cloud-arrow-up-fill"></i>
+                                <p>Drag & Drop to Upload File <br> OR</p>
+                                <input type="file" name="files" id="drag-drop" multiple="multiple" required>
+                                <label class="slc-btn" for="drag-drop" id="drag-drop-lab">Browse Files</label>
+                                <div class="show-files"></div>
+                                <input type="submit" value="Upload" id="upload-sub">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <table class="folder">
+                    <% if (content) {%>
+                        <tr class="file-header">
+                            <th>Filename</th>
+                            <th>Type</th>
+                            <th>Size</th>
+                            <th>Data Modified</th>
+                            <th>Download</th>
+                        </tr>
+                        <% var i=1; for (const obj in content) {%>
+                            <tr class="file" >
+                                <% for (const key in content[obj]) {%>
+                                    <td class="file-content" id="index-<%= i %>">
+                                        <% if (dir) {%>
+                                            <a href="/sharedFolder?path=<%= content[obj]['name'] %>&dir=<%= dir %>">
+                                                <%= content[obj][key] %>
+                                            </a>
+                                            <% } else {%>
+                                                <a href="/sharedFolder?path=<%= content[obj]['name'] %>">
+                                                    <%= content[obj][key] %>
+                                                </a>
+                                                <% } %>
+                                    </td>
+                                    <% } %>
+                                        <td class="file-content">
+                                            <div class="DbtnBox">
+                                                <% if (dir) {%>
+                                                    <a href="/sharedFolder/download?path=<%= content[obj]['name'] %>&dir=<%= dir %>"
+                                                        class="Dbtn">
+                                                        <div class="btn-icon"><i class="bi bi-box-arrow-down"></i></div>
+                                                        <span>Download</span>
+                                                    </a>
+                                                    <% } else {%>
+                                                        <a href="/sharedFolder/download?path=<%= content[obj]['name'] %>"
+                                                            class="Dbtn">
+                                                            <div class="btn-icon"><i class="bi bi-box-arrow-down"></i>
+                                                            </div><span>Download</span>
+                                                        </a>
+                                                        <% } %>
+                                            </div>
+                                        </td>
+                            </tr>
+                            <% i++; } %>
+                                <% } %>
+                </table>
+                <div class="contextMenu">
+                    <div class="item opn">Open</div>
+                    <div class="item dwn">Download</div>
+                    <div class="item dlt">Delete</div>
+                </div>
+            </div>
+        </div>
+        <script src="sharedFolder_static.js"></script>
+</body>
+
+</html>

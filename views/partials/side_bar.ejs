@@ -1,0 +1,149 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="sidebar.css">
+
+
+<div class="side-container">
+    <div class="hamburger">
+        <a href="#" onclick="displayLinks()">
+            <i class="bi bi-list"></i>
+        </a>
+    </div>
+    
+    <div class="sidebar">
+        <div class="sidebar_inner">
+            <div class="sidebar_item">
+                <div class="nav-text">
+                    <span class="header-text">Dashboard</span>
+                </div>
+            </div>
+            <div class="sidebar_item link overview">
+                <a href="/home" class="page">
+                    <span class="icon"><i class="bi bi-columns-gap"></i></span>
+                    <span class="text">Overview</span>
+                </a>
+            </div>
+            <div class="sidebar_item link shared">
+                <a href="/sharedFolder" class="page">
+                    <span class="icon"><i class="bi bi-folder-fill"></i></span>
+                    <span class="text">Shared Folder</span>
+                </a>
+            </div>
+            <div class="sidebar_item link pwd-manager">
+                <a href="#" class="page">
+                    <span class="icon"><i class="bi bi-lock-fill"></i></span>
+                    <span class="text">Pwd Manager</span>
+                </a>
+            </div>
+            <div class="sidebar_item link  vpn">
+                <a href="#" class="page">
+                    <span class="icon"><i class="bi bi-key-fill"></i></span>
+                    <span class="text">Vpn</span>
+                </a>
+            </div>
+            <div class="sidebar_item link sys">
+                <a href="/sys-info" class="page">
+                    <span class="icon"><i class="bi bi-laptop"></i></span>
+                    <span class="text">System Info</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="top-container">
+    <div class="top-nav-item">
+        <div class="page-name">
+            <% if (page) {%>
+                <span id="page-name">
+                    <%= page %>
+                </span>
+                <% } %>
+        </div>
+    </div>
+    <div class="top-nav-item">
+        <div class="user-dropdown">
+            <div class="user" onclick="displayDropdown()">
+                <% if (user) {%>
+                    <span>
+                        <%= user %>
+                    </span>
+                    <% } %>
+                        <div id="user-icon">
+                            <span><i class="bi bi-person-circle"></i></span>
+                            <i class="bi bi-caret-down-fill"></i>
+                        </div>
+            </div>
+            <div class="dropdown-option">
+                <div class="dropdown-user">
+                    <% if (user) {%>
+                        <span>Signed in as <span class="uname">
+                                <%= user %>
+                            </span></span>
+                        <% } %>
+                </div>
+                <a href="/logout" class="logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% if (page) {%>
+    <script>
+        let page_name = '<%= page %>';
+        console.log(page_name)
+        switch (page_name) {
+            case 'Overview':
+                $('.overview').css('background-color', '#65666b');
+                break;
+            case 'Pwd Manager':
+                $('.pwd-manager').css('background-color', '#65666b');
+                break;
+            case 'Vpn':
+                $('.vpn').css('background-color', '#65666b');
+                break;
+            case 'System Information':
+                $('.sys').css('background-color', '#65666b');
+                break;
+            case 'Shared Folder':
+                $('.shared').css('background-color', '#65666b');
+                break;
+        }
+    </script>
+<% } %>
+
+<script>
+    function displayDropdown() {
+        const dropdown = $('.dropdown-option');
+        if (dropdown.css('display') === 'none') {
+            dropdown.css('display', 'block');
+        } else {
+            dropdown.css('display', 'none');
+        }
+    }
+
+    function displayLinks() {
+        const links = $('.sidebar');
+        if (links.css('display') === 'none') {
+            links.css('display', 'block');
+        } else {
+            links.css('display', 'none');
+        }
+    }
+
+    $(window).on('load resize', function () {
+        let width = this.innerWidth;
+        if (width <= 900) {
+            $('.hamburger').css('display', 'block');
+            $('.sidebar').css('display', 'none');
+            $('.top-container').css('height', '4rem');
+        }
+        else {
+            $('.hamburger').css('display', 'none');
+            $('.sidebar').css('display', 'block');
+            $('.top-container').css('height', '5rem');
+        }
+    })
+</script>
