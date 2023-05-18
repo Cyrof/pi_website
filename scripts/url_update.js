@@ -10,20 +10,40 @@ const dotenv = require('dotenv');
 
 // global variables
 const path = "./README.md";
-try{
-    var branch = process.env.GIT_BRANCH
-    var git_name = process.env.GIT_NAME
-    var git_email = process.env.GIT_EMAIL
-    var git_uname = process.env.GIT_UNAME
-    var git_pat = process.env.GIT_PAT
-} catch (err){
-    dotenv.config()
-    branch = process.env.GIT_BRANCH
-    git_name = process.env.GIT_NAME
-    git_email = process.env.GIT_EMAIL
-    git_uname = process.env.GIT_UNAME
-    git_pat = process.env.GIT_PAT
-}
+// try{
+//     var branch = process.env.GIT_BRANCH
+//     var git_name = process.env.GIT_NAME
+//     var git_email = process.env.GIT_EMAIL
+//     var git_uname = process.env.GIT_UNAME
+//     var git_pat = process.env.GIT_PAT
+// } catch (err){
+//     dotenv.config()
+//     branch = process.env.GIT_BRANCH
+//     git_name = process.env.GIT_NAME
+//     git_email = process.env.GIT_EMAIL
+//     git_uname = process.env.GIT_UNAME
+//     git_pat = process.env.GIT_PAT
+// }
+
+
+dotenv.config()
+
+var env_var = {}
+Object.entries(process.env).forEach(([key, val]) => {
+    // 
+    if (key.startsWith('GIT_BRANCH')) {
+        env_var.branch = val
+    } else if (key.startsWith('GIT_NAME')){
+        env_var.git_name = val
+    } else if (key.startsWith('GIT_EMAIL')){
+        env_var.git_email = val
+    } else if (key.startsWith('GIT_UNAME')){
+        env_var.git_uname = val
+    } else if (key.startsWith('GIT_PAT')){
+        env_var.git_pat = val
+    }
+})
+
 
 // ========================================= //
 // function to push updated readme file to github 
@@ -31,19 +51,19 @@ try{
 async function pushReadme() {
     // try and catch to to catch err // test
     try {
-        await git.addConfig('user.name', git_name, append = true, scope = "global")
-        await git.addConfig('user.email', git_email, append = true, scope = "global")
+        await git.addConfig('user.name', env_var.git_name, append = true, scope = "global")
+        await git.addConfig('user.email', env_var.git_email, append = true, scope = "global")
         try{
-            await git.addRemote('user', `https://${git_uname}:${git_pat}@github.com/${git_uname}/pi_website.git`)
+            await git.addRemote('user', `https://${env_var.git_uname}:${env_var.git_pat}@github.com/${env_var.git_uname}/pi_website.git`)
         } catch (err) {
             console.log(err);
         }
-        await git.checkout(branch)
+        await git.checkout(env_var.branch)
         await git.add(path);
         console.log("README.md staged...")
         await git.commit('Update readme');
         console.log("Committed changes...")
-        await git.push('user', branch);
+        await git.push('user', env_var.branch);
         console.log("Pushed to github...")
     } catch (err) {
         console.error(err);
@@ -55,7 +75,7 @@ async function pushReadme() {
 // function to get content of the readme file and update the url
 
 var update_url = async function (url) {
-    await git.pull('origin', branch)
+    await git.pull('origin', env_var.branch)
     console.log("Pull from github...")
     fs.readFile(path, function (err, data) {
         if (err) throw err;
