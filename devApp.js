@@ -3,15 +3,28 @@ const nodemon = require('nodemon');
 const ngrok = require('ngrok');
 const dotenv = require('dotenv');
 // dotenv.config();
-try{
-    var port_env = process.env.PORT;
-    var auth_token = process.env.AUTH;
-} catch(err) {
-    dotenv.config()
-    port_env = process.env.PORT;
-    auth_token = process.env.AUTH;
-}
-const port = port_env || 8080;
+// try{
+//     var port_env = process.env.PORT;
+//     var auth_token = process.env.AUTH;
+// } catch(err) {
+//     dotenv.config()
+//     port_env = process.env.PORT;
+//     auth_token = process.env.AUTH;
+// }
+
+dotenv.config()
+
+var env_var = {}
+Object.entries(process.env).forEach(([key, val]) => {
+    // 
+    if (key.startsWith('AUTH')) {
+        env_var.auth_token = val
+    } else if (key.startsWith('PORT')){
+        env_var.port_env = val
+    }
+})
+
+const port = env_var.port_env || 8080;
 const update_url = require('./scripts/url_update');
 
 // ==================================== //
@@ -28,7 +41,7 @@ let url = null
 nodemon.on('start', async () => {
     if (!url) {
         url = await ngrok.connect({
-            authtoken: auth_token,
+            authtoken: env_var.auth_token,
             port: port,
             // region: 'ap',
         });
