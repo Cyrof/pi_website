@@ -8,12 +8,25 @@ WORKDIR /usr/scr/app
 # where available (npm@5+)
 COPY package*.json ./
 
+# install latest node / npm release
+# RUN apk add --update nodejs npm
+# RUN apk add --update npm
+# RUN apk add nodejs npm
+
 RUN npm install 
 # for production use 
 # RUN NPM ci --omit=dev
 # RUN npm install npm@latest -g && npm install n -g && n latest
+# RUN apk update
+# RUN apk add --update nodejs npm
 
-RUN ln -s "$(which node)" /usr/bin/node
+# RUN ln -s "$(which node)" /usr/bin/node
+
+# create directory for drive mnt
+RUN mkdir mnt
+
+# create .env file
+RUN touch .env
 
 # bundle app source
 COPY . .

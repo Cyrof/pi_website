@@ -113,7 +113,7 @@ router.get('/download', (req, res) => {
 
 // upload files route
 var storage = multer.diskStorage({
-    destination: process.env.SHARED_FOLDER_PATH,
+    destination: `${__dirname}${process.env.SHARED_FOLDER_PATH}`,
     filename: function(req, file, cb){
         cb(null, file.originalname);
     }

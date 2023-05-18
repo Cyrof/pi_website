@@ -16,14 +16,38 @@ const serveIndex = require('serve-index');
 const zip = require('express-easy-zip');
 const dotenv = require('dotenv');
 
-dotenv.config();
+// dotenv.config();
+// try{
+//     var db_url = process.env.DATABASE_URL
+//     var port_env = process.env.PORT
+//     var key = process.env.SECRET_KEY
+// } catch(err) {
+//     dotenv.config();
+//     db_url = process.env.DATABASE_URL
+//     port_env = process.env.PORT
+//     key = process.env.SECRET_KEY
+// }
+
+dotenv.config()
+
+var env_var = {}
+Object.entries(process.env).forEach(([key, val]) => {
+    // 
+    if (key.startsWith('DATABASE_URL')) {
+        env_var.db_url = val
+    } else if (key.startsWith('PORT')){
+        env_var.port_env = val
+    } else if (key.startsWith('SECRET_KEY')) {
+        env_var.key = val
+    }
+})
 
 // create app variable
 const app = express();
 
 
 // set up port 
-const port = process.env.PORT || 8080;
+const port = env_var.port_env || 8080;
 
 // set up routes
 const home = require('./routes/home');
@@ -37,7 +61,7 @@ const bodyParser = require('body-parser');
 
 // set boyd parser, view engine and stylesheet
 app.set('view engine', 'ejs');
-app.use(logger('common', {stream: fs.createWriteStream('./website.log', {flags: 'a'})}));
+app.use(logger('common', { stream: fs.createWriteStream('./website.log', { flags: 'a' }) }));
 app.use(logger('dev'));
 // app.use(flash());
 app.use(bodyParser.json());
@@ -49,13 +73,14 @@ app.use(cookieParser());
 // import dotenv to setup database
 require('dotenv').config();
 const db = require('./db/database');
-const mongoString = process.env.DATABASE_URL;
+const { env } = require('process');
+const mongoString = env_var.db_url;
 db(mongoString);
 
 // config session
 const TWO_HOURS = 1000 * 60 * 60 * 2;
 app.use(session({
-    secret: process.env.SECRET_KEY,
+    secret: env_var.key,
     saveUninitialized: false,
     name: 'session',
     cookie: {
@@ -98,7 +123,7 @@ app.use(function (err, req, res, next) {
         err: err.message,
         status: err.status || 500
     }
-    res.render('error', {error: errors});
+    res.render('error', { error: errors });
 });
 
 let server = app.listen(port, () => {
