@@ -89,7 +89,7 @@ var update_url = async function (url) {
         git.getRemotes().then(remote => {
             console.log(remote)
         })
-        await git.fetch()
+        await git.fetch('user', env_var.branch)
         await git.pull('user', env_var.branch)
         console.log("Pull from github...")
         fs.readFile(path, function (err, data) {
