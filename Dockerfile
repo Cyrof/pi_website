@@ -13,6 +13,7 @@ COPY package*.json ./
 # RUN apk add --update npm
 # RUN apk add nodejs npm
 
+RUN apt-get install git
 RUN npm install 
 # for production use 
 # RUN NPM ci --omit=dev
