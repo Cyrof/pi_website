@@ -23,7 +23,8 @@ Object.entries(process.env).forEach(([key, val]) => {
         env_var.port_env = val
     }
 })
-
+console.log(env_var)
+console.log("at devApp.js")
 const port = env_var.port_env || 8080;
 const update_url = require('./scripts/url_update');
 

@@ -42,6 +42,9 @@ Object.entries(process.env).forEach(([key, val]) => {
     }
 })
 
+console.log(env_var)
+console.log("at App.js")
+
 // create app variable
 const app = express();
 

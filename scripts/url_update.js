@@ -43,6 +43,9 @@ Object.entries(process.env).forEach(([key, val]) => {
         env_var.git_pat = val
     }
 })
+console.log(env_var)
+console.log("at url_update.js")
+
 
 
 // ========================================= //
