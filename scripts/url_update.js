@@ -33,13 +33,13 @@ Object.entries(process.env).forEach(([key, val]) => {
     // 
     if (key.startsWith('GIT_BRANCH')) {
         env_var.branch = val
-    } else if (key.startsWith('GIT_NAME')){
+    } else if (key.startsWith('GIT_NAME')) {
         env_var.git_name = val
-    } else if (key.startsWith('GIT_EMAIL')){
+    } else if (key.startsWith('GIT_EMAIL')) {
         env_var.git_email = val
-    } else if (key.startsWith('GIT_UNAME')){
+    } else if (key.startsWith('GIT_UNAME')) {
         env_var.git_uname = val
-    } else if (key.startsWith('GIT_PAT')){
+    } else if (key.startsWith('GIT_PAT')) {
         env_var.git_pat = val
     }
 })
@@ -56,7 +56,7 @@ async function pushReadme() {
     try {
         await git.addConfig('user.name', env_var.git_name, append = true, scope = "global")
         await git.addConfig('user.email', env_var.git_email, append = true, scope = "global")
-        try{
+        try {
             await git.addRemote('user', `https://${env_var.git_uname}:${env_var.git_pat}@github.com/${env_var.git_uname}/pi_website.git`)
         } catch (err) {
             console.log(err);
@@ -78,36 +78,42 @@ async function pushReadme() {
 // function to get content of the readme file and update the url
 
 var update_url = async function (url) {
-    try{
+    try {
         await git.addConfig('user.name', env_var.git_name, append = true, scope = "global")
         await git.addConfig('user.email', env_var.git_email, append = true, scope = "global")
         await git.addRemote('user', `https://${env_var.git_uname}:${env_var.git_pat}@github.com/${env_var.git_uname}/pi_website.git`)
     } catch (err) {
         console.log(err);
     }
-    await git.pull('user', env_var.branch)
-    console.log("Pull from github...")
-    fs.readFile(path, function (err, data) {
-        if (err) throw err;
+    try {
+        await git.pull('user', env_var.branch)
+        console.log("Pull from github...")
+        fs.readFile(path, function (err, data) {
+            if (err) throw err;
 
-        var content = data.toString().split('\n')
+            var content = data.toString().split('\n')
 
-        content.forEach((line, i) => {
-            if (line.includes("URL")) {
-                var new_url = content[i].split(' ');
-                new_url.pop()
-                new_url.push(url)
-                new_url = new_url.join(" ");
-                content[i] = new_url;
-            }
+            content.forEach((line, i) => {
+                if (line.includes("URL")) {
+                    var new_url = content[i].split(' ');
+                    new_url.pop()
+                    new_url.push(url)
+                    new_url = new_url.join(" ");
+                    content[i] = new_url;
+                }
+            });
+
+            content = content.join("\n");
+            var f = fs.openSync(path, 'w');
+            var bufferedText = new Buffer(content);
+            fs.writeSync(f, bufferedText);
         });
-
-        content = content.join("\n");
-        var f = fs.openSync(path, 'w');
-        var bufferedText = new Buffer(content);
-        fs.writeSync(f, bufferedText);
-    });
-    pushReadme();
+        pushReadme();
+    }
+    catch(err){
+        console.log(err);
+        console.error("An error occurred while pulling from github")
+    }
 }
 
 module.exports = update_url;
