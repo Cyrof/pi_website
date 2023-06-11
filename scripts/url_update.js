@@ -57,7 +57,7 @@ async function pushReadme() {
         await git.addConfig('user.name', env_var.git_name, append = true, scope = "global")
         await git.addConfig('user.email', env_var.git_email, append = true, scope = "global")
         try {
-            await git.addRemote('user', `https://${env_var.git_uname}:${env_var.git_pat}@github.com/${env_var.git_uname}/pi_website.git`)
+            await git.addRemote('user', `https://${env_var.git_pat}@github.com/${env_var.git_uname}/pi_website.git`)
         } catch (err) {
             console.log(err);
         }
