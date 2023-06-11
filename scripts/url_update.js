@@ -85,7 +85,7 @@ var update_url = async function (url) {
     } catch (err) {
         console.log(err);
     }
-    await git.pull('origin', env_var.branch)
+    await git.pull('user', env_var.branch)
     console.log("Pull from github...")
     fs.readFile(path, function (err, data) {
         if (err) throw err;
