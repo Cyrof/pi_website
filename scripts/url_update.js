@@ -82,7 +82,7 @@ var update_url = async function (url) {
         await git.addConfig('user.name', env_var.git_name, append = true, scope = "global")
         await git.addConfig('user.email', env_var.git_email, append = true, scope = "global")
         await git.addRemote('user', `https://${env_var.git_uname}:${env_var.git_pat}@github.com/${env_var.git_uname}/pi_website.git`)
-    } catch (err) {
+    } catch (err) {addRemote
         console.log(err);
     }
     try {
@@ -90,7 +90,7 @@ var update_url = async function (url) {
             console.log(remote)
         })
         await git.fetch()
-        await git.pull('origin', env_var.branch)
+        await git.pull('user', env_var.branch)
         console.log("Pull from github...")
         fs.readFile(path, function (err, data) {
             if (err) throw err;
