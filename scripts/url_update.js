@@ -82,7 +82,7 @@ var update_url = async function (url) {
         await git.addConfig('user.name', env_var.git_name, append = true, scope = "global")
         await git.addConfig('user.email', env_var.git_email, append = true, scope = "global")
         await git.addRemote('user', `https://${env_var.uname}:${env_var.git_pat}@github.com/${env_var.git_uname}/pi_website.git`)
-    } catch (err) {addRemote
+    } catch (err) {
         console.log(err);
     }
     try {
