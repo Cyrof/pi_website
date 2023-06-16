@@ -78,6 +78,7 @@ async function pushReadme() {
 // function to get content of the readme file and update the url
 
 var update_url = async function (url) {
+    console.log('test')
     try {
         await git.addConfig('user.name', env_var.git_name, append = true, scope = "global")
         await git.addConfig('user.email', env_var.git_email, append = true, scope = "global")
