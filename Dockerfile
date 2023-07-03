@@ -24,7 +24,7 @@ RUN npm install
 # RUN ln -s "$(which node)" /usr/bin/node
 
 # install git cli
-RUN apt install gh
+RUN apt-get install gh
 
 # create directory for drive mnt
 RUN mkdir mnt
