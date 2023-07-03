@@ -13,9 +13,8 @@ COPY package*.json ./
 # RUN apk add --update npm
 # RUN apk add nodejs npm
 RUN apt update
-RUN apt-get install git
-# install git cli
-RUN apt-get install gh
+RUN apt upgrade -y
+
 RUN npm install 
 # for production use 
 # RUN NPM ci --omit=dev
@@ -24,8 +23,6 @@ RUN npm install
 # RUN apk add --update nodejs npm
 
 # RUN ln -s "$(which node)" /usr/bin/node
-
-
 
 # create directory for drive mnt
 RUN mkdir mnt

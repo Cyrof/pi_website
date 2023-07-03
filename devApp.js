@@ -19,7 +19,7 @@ Object.entries(process.env).forEach(([key, val]) => {
     // 
     if (key.startsWith('AUTH')) {
         env_var.auth_token = val
-    } else if (key.startsWith('PORT')){
+    } else if (key.startsWith('PORT')) {
         env_var.port_env = val
     }
 })
