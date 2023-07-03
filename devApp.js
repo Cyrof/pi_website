@@ -26,7 +26,6 @@ Object.entries(process.env).forEach(([key, val]) => {
 console.log(env_var)
 console.log("at devApp.js")
 const port = env_var.port_env || 8080;
-const update_url = require('./scripts/url_update');
 
 // ==================================== //
 // config nodemon 
@@ -51,7 +50,7 @@ nodemon.on('start', async () => {
         // For more information visit https://github.com/Cyrof/pi_website/tree/master
 
         // turn off for development to reduce cluttering git commits
-        update_url(url);
+        // update_url(url);
         console.log(`Server now available at ${url}`);
     };
 }).on('restart', () => {
