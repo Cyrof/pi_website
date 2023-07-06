@@ -39,22 +39,27 @@ let url = null
 // set functions to activate based on the status of nodemon 
 
 nodemon.on('start', async () => {
-    if (!url) {
-        url = await ngrok.connect({
-            authtoken: env_var.auth_token,
-            port: port,
-            // region: 'ap',
-        });
-        // IMPORTANT 
-        // Make sure there is GIT_BRANCH env variable before running
-        // For more information visit https://github.com/Cyrof/pi_website/tree/master
+    try {
+        if (!url) {
+            url = await ngrok.connect({
+                authtoken: env_var.auth_token,
+                port: port,
+                // region: 'ap',
+            });
+            // IMPORTANT 
+            // Make sure there is GIT_BRANCH env variable before running
+            // For more information visit https://github.com/Cyrof/pi_website/tree/master
 
-        // turn off for development to reduce cluttering git commits
-        // update_url(url);
-        console.log(`Server now available at ${url}`);
-    };
+            // turn off for development to reduce cluttering git commits
+            // update_url(url);
+            console.log(`Server now available at ${url}`);
+        };
+    }catch (err){
+        console.log(err)
+        console.log("Ngrok error has occurred")
+    }
 }).on('restart', () => {
-    console.log(`Server restarted at ${url}`);
-}).on('quit', async () => {
-    await ngrok.kill();
-});
+        console.log(`Server restarted at ${url}`);
+    }).on('quit', async () => {
+        await ngrok.kill();
+    });
