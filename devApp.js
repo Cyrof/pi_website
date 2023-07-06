@@ -57,6 +57,7 @@ nodemon.on('start', async () => {
     }catch (err){
         console.log(err)
         console.log("Ngrok error has occurred")
+        console.log("url=" + url)
     }
 }).on('restart', () => {
         console.log(`Server restarted at ${url}`);
