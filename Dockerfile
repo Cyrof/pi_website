@@ -37,4 +37,4 @@ COPY . .
 EXPOSE 8080
 
 # CMD ["which", "node"]
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]
