@@ -48,7 +48,11 @@ console.log("at App.js")
 // create app variable
 const app = express();
 
-
+console.log(env_var.port_env)
+if (typeof(env_var.port_env) === 'string'){
+    env_var.port_env = parseInt(env_var.port_env);
+    console.log(env_var.port_env)
+}
 // set up port 
 const port = env_var.port_env || 8080;
 
