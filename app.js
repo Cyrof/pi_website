@@ -58,6 +58,7 @@ const webhook = require('./routes/webhook');
 const sys_info = require('./routes/system_information');
 const users = require('./routes/users');
 const sharedFolder = require('./routes/shared_folder');
+const page_down = require('./routes/page_down');
 
 // set body parser
 const bodyParser = require('body-parser');
@@ -71,6 +72,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public/stylesheets'));
 app.use(express.static(__dirname + '/public/static'));
+app.use(express.static(__dirname + '/public/images'));
 app.use(cookieParser());
 
 // import dotenv to setup database
@@ -107,7 +109,10 @@ app.use('/', users);
 app.use('/home', home);
 app.use('/webhook', webhook);
 app.use('/sys-info', sys_info);
-app.use('/sharedFolder', sharedFolder);
+// app.use('/sharedFolder', sharedFolder);
+app.use('/sharedFolder', page_down);
+app.use('/pwd-manager', page_down);
+app.use('/vpn', page_down)
 
 // catch 404 error and forward to error handler
 app.use(function (req, res, next) {
