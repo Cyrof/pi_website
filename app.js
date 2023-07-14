@@ -35,12 +35,27 @@ Object.entries(process.env).forEach(([key, val]) => {
     // 
     if (key.startsWith('DATABASE_URL')) {
         env_var.db_url = val
-    } else if (key.startsWith('PORT')){
+    } else if (key.startsWith('PORT')) {
         env_var.port_env = val
     } else if (key.startsWith('SECRET_KEY')) {
         env_var.key = val
     }
 })
+
+
+try {
+    const {
+        MONGO_USERNAME,
+        MONGO_PASSWORD,
+        MONGO_HOSTNAME,
+        MONGO_PORT,
+        MONGO_DB
+    } = process.env;
+    var db_url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
+} catch (err) {
+    console.log(err);
+    console.log("Error in construting db url")
+}
 
 console.log(env_var)
 console.log("at App.js")
@@ -49,7 +64,7 @@ console.log("at App.js")
 const app = express();
 
 console.log(env_var.port_env)
-if (typeof(env_var.port_env) === 'string'){
+if (typeof (env_var.port_env) === 'string') {
     env_var.port_env = parseInt(env_var.port_env);
     console.log(env_var.port_env)
 }
@@ -83,7 +98,18 @@ app.use(cookieParser());
 require('dotenv').config();
 const db = require('./db/database');
 const { env } = require('process');
-const mongoString = env_var.db_url;
+
+
+try {
+    var mongoString = env_var.db_url;
+    if (mongoString === undefined){
+        mongoString = db_url
+    }
+} catch (err) {
+    console.log(err);
+    mongoString = db_url
+}
+console.log(mongoString)
 db(mongoString);
 
 // config session
