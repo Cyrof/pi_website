@@ -76,6 +76,7 @@ const home = require('./routes/home');
 const webhook = require('./routes/webhook');
 const sys_info = require('./routes/system_information');
 const users = require('./routes/users');
+const health = require('./routes/health');
 const sharedFolder = require('./routes/shared_folder');
 const page_down = require('./routes/page_down');
 
@@ -143,6 +144,7 @@ app.use('/sys-info', sys_info);
 app.use('/sharedFolder', page_down);
 app.use('/pwd-manager', page_down);
 app.use('/vpn', page_down)
+app.use('/health-check', health)
 
 // catch 404 error and forward to error handler
 app.use(function (req, res, next) {
