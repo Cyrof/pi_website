@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="grafana.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <title>Grafana model</title>
+</head>
+
+<body style="background-color: #232327;">
+    <!-- include nav bar -->
+    <%- include('./partials/side_bar'); %>
+        <div class="wrapper">
+            <div class="container">
+                <!-- <div class="test1">
+                    <h2 style="color: white;">this is test 1</h2>
+                </div>
+                <div class="test2">
+                    <h2 style="color: white;">this is test 2</h2>
+                </div>
+                <div class="test3">
+                    <h2 style="color: white;">This is test 3</h2>
+                </div> -->
+                <iframe src="<%= url %>" frameborder="0"></iframe>
+            </div>
+        </div>
+</body>
+
+</html>

@@ -79,6 +79,7 @@ const users = require('./routes/users');
 const health = require('./routes/health');
 const sharedFolder = require('./routes/shared_folder');
 const page_down = require('./routes/page_down');
+const grafana = require('./routes/grafana_model');
 
 // set body parser
 const bodyParser = require('body-parser');
@@ -145,6 +146,7 @@ app.use('/sharedFolder', page_down);
 app.use('/pwd-manager', page_down);
 app.use('/vpn', page_down)
 app.use('/health-check', health)
+app.use('/grafana', grafana);
 
 // catch 404 error and forward to error handler
 app.use(function (req, res, next) {

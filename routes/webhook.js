@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const wol = require('../scripts/wol');
 const git_pull = require('../scripts/auto_pull');
+const save_grafana = require('../scripts/save_grafana');
 
 router.get('/', (req, res) => {
     req.setTimeout(500000);
@@ -22,5 +23,11 @@ router.post('/', (req, res) => {
     }
     res.redirect('/');
 });
+
+// router.post('/grafana-data', async (req, res) => {
+//     // console.log(req.body)
+//     await save_grafana(data=req.body)
+//     res.send(req.body)
+// });
 
 module.exports = router;

@@ -49,6 +49,12 @@
                     <span class="text">System Info</span>
                 </a>
             </div>
+            <div class="sidebar_item link grafana">
+                <a href="/grafana" class="page">
+                    <span class="icon"><i class="bi bi-pie-chart"></i></span>
+                    <span class="text">Grafana charts</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -110,6 +116,8 @@
             case 'Shared Folder':
                 $('.shared').css('background-color', '#65666b');
                 break;
+            case 'Grafana Charts':
+                $('.grafana').css('background-color', '#65666b');
         }
     </script>
 <% } %>
