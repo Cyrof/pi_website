@@ -7,6 +7,7 @@ const wol = require('wakeonlan')
 // });
 
 const option = {
+    ip: '192.168.86.43',
     address: '255.255.255.0',
     port: 9,
     num_packets: 3

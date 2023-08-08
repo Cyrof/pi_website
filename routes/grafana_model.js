@@ -15,7 +15,7 @@ router.get('/', checker, async (req, res) => {
     user = user[0]
     // let url = 'http://192.168.6.31:30000'
 
-    res.redirect('http://192.168.86.31:30000')
+    res.redirect('http://116.87.173.227:30000')
     // res.render('../views/grafana.ejs', {user: user.uname, page: 'Grafana Charts', 'url': url});
     // res.send('hi')
 })
